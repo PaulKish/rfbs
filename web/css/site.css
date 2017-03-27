@@ -113,3 +113,11 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.summary{
+    margin-top: 30px;
+}
+
+.pull-left > h1{
+    margin-top: 0px;
+}

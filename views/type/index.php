@@ -11,22 +11,28 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="type-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="pull-left">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
+    <div class="pull-right">
+        <?= Html::a('Create Type', ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
+
     <?php Pjax::begin(); ?>
 
-    <p>
-        <?= Html::a('Create Type', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="clearfix"></div>
+    <hr>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
+                    <div class='pull-right'>{summary}</div>",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'type',
-            'category_id',
-            'group_id',
+            'category.category',
+            'group.group',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
