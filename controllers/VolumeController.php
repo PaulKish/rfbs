@@ -56,7 +56,7 @@ class VolumeController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => volume::find(),
+            'query' => volume::find()->orderBy('id desc'),
             'pagination' => ['pagesize'=>10]
         ]);
 
