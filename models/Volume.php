@@ -52,10 +52,10 @@ class Volume extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_id' => 'Product ID',
+            'user_id' => 'Contributor',
+            'product_id' => 'Commodity',
             'volume' => 'Volume',
-            'type_id' => 'Type ID',
+            'type_id' => 'Type',
             'date' => 'Date',
             'time' => 'Time',
             'active' => 'Active',

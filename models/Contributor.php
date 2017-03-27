@@ -58,8 +58,8 @@ class Contributor extends \yii\db\ActiveRecord
             'email' => 'Email',
             'telephone' => 'Telephone',
             'organization' => 'Organization',
-            'role_id' => 'Role ID',
-            'country_id' => 'Country ID',
+            'role_id' => 'Role',
+            'country_id' => 'Country',
             'date' => 'Date',
             'active' => 'Active',
         ];
@@ -87,5 +87,10 @@ class Contributor extends \yii\db\ActiveRecord
     public function getVolumes()
     {
         return $this->hasMany(Volume::className(), ['user_id' => 'id']);
+    }
+
+
+    public function getName(){
+        return $this->organization.' - '.$this->username;
     }
 }

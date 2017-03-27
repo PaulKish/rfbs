@@ -10,6 +10,11 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
+use app\models\Type;
+use app\models\Commodity;
+use app\models\Contributor;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * VolumeController implements the CRUD actions for volume model.
@@ -84,8 +89,16 @@ class VolumeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            //fetch dropdown data
+            $types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
+            $commodities = ArrayHelper::map(Commodity::find()->all(), 'id', 'commodity');
+            $contributors = ArrayHelper::map(Contributor::find()->all(), 'id', 'name');
+
             return $this->render('create', [
                 'model' => $model,
+                'types' => $types,
+                'commodities' => $commodities,
+                'contributors' => $contributors
             ]);
         }
     }
@@ -103,8 +116,16 @@ class VolumeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            //fetch dropdown data
+            $types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
+            $commodities = ArrayHelper::map(Commodity::find()->all(), 'id', 'commodity');
+            $contributors = ArrayHelper::map(Contributor::find()->all(), 'id', 'name');
+
             return $this->render('update', [
                 'model' => $model,
+                'types' => $types,
+                'commodities' => $commodities,
+                'contributors' => $contributors
             ]);
         }
     }

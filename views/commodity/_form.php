@@ -14,7 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'commodity')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
+    <?= $form->field($model, 'active')->dropDownList(
+    		[1=>'Yes',0=>'No'],
+    		['prompt'=>'--Please select--']
+    	) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

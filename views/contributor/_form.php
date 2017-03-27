@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\contributor */
@@ -22,13 +23,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'organization')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'role_id')->textInput() ?>
+    <?= $form->field($model, 'role_id')->dropDownList(
+        $roles,['prompt'=>'--Please select--']) ?>
 
-    <?= $form->field($model, 'country_id')->textInput() ?>
+    <?= $form->field($model, 'country_id')->dropDownList(
+        $countries,['prompt'=>'--Please select--']) ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?= $form->field($model, 'date')->widget(DatePicker::classname(), [
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd'
+        ]
+    ]) ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
+    <?= $form->field($model, 'active')->dropDownList(
+        [1=>'Yes',0=>'No'],['prompt'=>'--Please select--']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
+use app\models\Country;
+use app\models\Role;
+use yii\helpers\ArrayHelper;
 
 /**
  * ContributorController implements the CRUD actions for contributor model.
@@ -84,8 +87,14 @@ class ContributorController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+            $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
+
             return $this->render('create', [
                 'model' => $model,
+                'countries' => $countries,
+                'roles' => $roles
             ]);
         }
     }
@@ -103,8 +112,14 @@ class ContributorController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+            $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
+
             return $this->render('update', [
                 'model' => $model,
+                'countries' => $countries,
+                'roles' => $roles
             ]);
         }
     }

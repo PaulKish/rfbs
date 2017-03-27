@@ -48,8 +48,8 @@ class Type extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'type' => 'Type',
-            'category_id' => 'Category ID',
-            'group_id' => 'Group ID',
+            'category_id' => 'Category',
+            'group_id' => 'Group',
         ];
     }
 

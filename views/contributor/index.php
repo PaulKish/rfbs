@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'role.role',
             'country.country',
             // 'date',
-            // 'active',
+            'active:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
