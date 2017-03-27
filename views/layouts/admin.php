@@ -43,8 +43,11 @@ AppAsset::register($this);
 		    echo Nav::widget([
 		        'options' => ['class' => 'navbar-nav navbar-right'],
 		        'items' => [
-		            ['label' => 'Home', 'url' => ['/site/index']]
-		        ],
+		            ['label' => 'Home', 'url' => ['/site/index']],
+		            ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
+				        'url' => ['/user/security/logout'],
+				        'linkOptions' => ['data-method' => 'post']],
+					],
 		    ]);
 		    NavBar::end();
 		    ?>
@@ -53,7 +56,33 @@ AppAsset::register($this);
 		        <?= Breadcrumbs::widget([
 		            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 		        ]) ?>
-		        <?= $content ?>
+
+		        <div class="row">
+		        	<div class="col-md-2">
+		        		<div class="panel panel-default">
+  							<div class="panel-body">
+				        		<?= Nav::widget([
+								        'options' => ['class' => 'nav-pills nav-stacked'],
+								        'items' => [
+								            ['label' => 'Assignment', 'url' => ['/assignment/index']],
+								            ['label' => 'Category', 'url' => ['/category/index']],
+								            ['label' => 'Commodity', 'url' => ['/commodity/index']],
+								            ['label' => 'Contributor', 'url' => ['/contributor/index']],
+								            ['label' => 'Country', 'url' => ['/country/index']],
+								            ['label' => 'Group', 'url' => ['/group/index']],
+								            ['label' => 'Role', 'url' => ['/role/index']],
+								            ['label' => 'Type', 'url' => ['/type/index']],
+								            ['label' => 'Volume', 'url' => ['/volume/index']]
+								        ],
+								    ]);
+								?>
+							</div>
+						</div>
+		        	</div>
+		        	<div class="col-md-10">
+		        		<?= $content ?>
+		        	</div>
+		        </div>
 		    </div>
 		</div>
 
