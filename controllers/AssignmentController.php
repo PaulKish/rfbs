@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
+use app\models\Type;
+use app\models\Role;
+use yii\helpers\ArrayHelper;
 
 /**
  * AssignmentController implements the CRUD actions for assignment model.
@@ -84,8 +87,14 @@ class AssignmentController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
+            $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
+
             return $this->render('create', [
                 'model' => $model,
+                'types' => $types,
+                'roles' => $roles
             ]);
         }
     }
@@ -103,8 +112,14 @@ class AssignmentController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
+            $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
+
             return $this->render('update', [
                 'model' => $model,
+                'types' => $types,
+                'roles' => $roles
             ]);
         }
     }

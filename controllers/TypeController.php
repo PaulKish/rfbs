@@ -111,8 +111,14 @@ class TypeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
+            $categories = ArrayHelper::map(Category::find()->all(), 'id', 'category');
+
             return $this->render('update', [
                 'model' => $model,
+                'groups' => $groups,
+                'categories' => $categories
             ]);
         }
     }
