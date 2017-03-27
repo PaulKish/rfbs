@@ -10,7 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
-
+use app\models\Group;
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 /**
  * TypeController implements the CRUD actions for type model.
  */
@@ -52,6 +54,7 @@ class TypeController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => type::find(),
+            'pagination' => ['pagesize'=>10]
         ]);
 
         return $this->render('index', [
@@ -83,8 +86,14 @@ class TypeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            // fetch drop down data
+            $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
+            $categories = ArrayHelper::map(Category::find()->all(), 'id', 'category');
+
             return $this->render('create', [
                 'model' => $model,
+                'groups' => $groups,
+                'categories' => $categories
             ]);
         }
     }

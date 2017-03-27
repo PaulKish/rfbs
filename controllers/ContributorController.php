@@ -52,6 +52,7 @@ class ContributorController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => contributor::find(),
+            'pagination' => ['pagesize'=>10]
         ]);
 
         return $this->render('index', [

@@ -52,6 +52,7 @@ class AssignmentController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => assignment::find(),
+            'pagination' => ['pagesize'=>10]
         ]);
 
         return $this->render('index', [

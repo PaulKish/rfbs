@@ -14,9 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList(
+            $categories,
+            ['prompt'=>'--Please select--']
+        ); ?>
 
-    <?= $form->field($model, 'group_id')->textInput() ?>
+    <?= $form->field($model, 'group_id')->dropDownList(
+            $groups,
+            ['prompt'=>'--Please select--']
+        ); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

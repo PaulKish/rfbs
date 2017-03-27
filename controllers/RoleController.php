@@ -56,6 +56,7 @@ class RoleController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'pagination' => ['pagesize'=>10]
         ]);
     }
 

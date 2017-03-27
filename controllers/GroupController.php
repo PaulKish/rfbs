@@ -52,6 +52,7 @@ class GroupController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => group::find(),
+            'pagination' => ['pagesize'=>10]
         ]);
 
         return $this->render('index', [

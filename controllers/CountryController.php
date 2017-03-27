@@ -52,6 +52,7 @@ class CountryController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => country::find(),
+            'pagination' => ['pagesize'=>10]
         ]);
 
         return $this->render('index', [
