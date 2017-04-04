@@ -46,12 +46,13 @@ AppAsset::register($this);
 		            ['label' => 'Home', 'url' => ['/site/index']],
 		            ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
 				        'url' => ['/user/security/logout'],
-				        'linkOptions' => ['data-method' => 'post']],
-					],
-					['label' => 'Sign in', 
+				        'linkOptions' => ['data-method' => 'post']
+				    ],
+				    ['label' => 'Sign in', 
                         'url' => ['/user/security/login'],
                         'visible'=> Yii::$app->user->isGuest
                     ],
+				],
 		    ]);
 		    NavBar::end();
 		    ?>
@@ -68,6 +69,7 @@ AppAsset::register($this);
 				        		<?= Nav::widget([
 								        'options' => ['class' => 'nav-pills nav-stacked'],
 								        'items' => [
+								        	['label' => 'RFBS', 'url' => ['/rfbs/index']],
 								            ['label' => 'Assignment', 'url' => ['/assignment/index']],
 								            ['label' => 'Category', 'url' => ['/category/index']],
 								            ['label' => 'Commodity', 'url' => ['/commodity/index']],
