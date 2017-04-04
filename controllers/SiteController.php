@@ -30,4 +30,25 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
+    /**
+     * Displays about.
+     *
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('index');
+    }
+
+
+    /**
+     * Displays contact.
+     *
+     * @return string
+     */
+    public function actionContact()
+    {
+        return $this->render('index');
+    }
 }

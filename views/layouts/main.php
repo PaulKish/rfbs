@@ -43,7 +43,18 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']]
+                    ['label' => 'Home', 'url' => ['/site/index']],
+                    ['label' => 'About', 'url' => ['/site/about']],
+                    ['label' => 'Contact Us', 'url' => ['/site/contact']],
+                    ['label' => 'Sign in', 
+                        'url' => ['/user/security/login'],
+                        'visible'=> Yii::$app->user->isGuest
+                    ],
+                    ['label' => 'Sign out',
+                        'url' => ['/user/security/logout'],
+                        'visible' => !Yii::$app->user->isGuest,
+                        'linkOptions' => ['data-method' => 'post'],
+                    ]
                 ],
             ]);
             NavBar::end();
