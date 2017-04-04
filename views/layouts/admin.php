@@ -48,6 +48,10 @@ AppAsset::register($this);
 				        'url' => ['/user/security/logout'],
 				        'linkOptions' => ['data-method' => 'post']],
 					],
+					['label' => 'Sign in', 
+                        'url' => ['/user/security/login'],
+                        'visible'=> Yii::$app->user->isGuest
+                    ],
 		    ]);
 		    NavBar::end();
 		    ?>
