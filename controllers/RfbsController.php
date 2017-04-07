@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
 use yii\base\Model;
@@ -61,7 +62,7 @@ class RfbsController extends \yii\web\Controller
     public function actionGrid()
     {
         $model = new GridForm;
-
+        $model->scenario = 'create';
         $commodities = ArrayHelper::map(Commodity::find()->all(),'id','commodity');
         $contributors = ArrayHelper::map(Contributor::find()->all(),'id','name');
 
@@ -77,6 +78,7 @@ class RfbsController extends \yii\web\Controller
      */ 
     public function actionGridForm(){
         $model = new GridForm;
+        $model->scenario = 'create';
         if ($model->load(Yii::$app->request->get())){
         
             // get assignments for role
@@ -123,13 +125,30 @@ class RfbsController extends \yii\web\Controller
     public function actionGridUpdate()
     {
         $model = new GridForm;
+        $model->scenario = 'update';
+
+        // show grid
+        if ($model->load(Yii::$app->request->get())){
+            $date = explode('-',$model->date);
+            $dataProvider = new ActiveDataProvider([
+                'query' => Volume::find()
+                    ->where(['product_id'=>$model->commodity])
+                    ->andWhere("MONTH(date) = {$date[1]} ")
+                    ->andWhere("YEAR(date) = {$date[0]}")
+                    ->groupBy('user_id'),
+                'pagination' => ['pagesize'=>10]
+            ]);
+
+            return $this->render('grid-index', [
+                'dataProvider' => $dataProvider,
+                'gridModel'=> $model
+            ]);
+        }
 
         $commodities = ArrayHelper::map(Commodity::find()->all(),'id','commodity');
-        $contributors = ArrayHelper::map(Contributor::find()->all(),'id','name');
 
-        return $this->render('grid',[
+        return $this->render('grid-update',[
             'commodities' => $commodities,
-            'contributors' => $contributors,
             'model'=> $model
         ]);
     }
@@ -137,10 +156,15 @@ class RfbsController extends \yii\web\Controller
     /**
      *  Update contributor records
      */ 
-    public function actionGridFormUpdate($id){
+    public function actionGridFormUpdate($id,$product,$date){
+        $date = explode('-',$date);
+
         // pull records
         $gridModel = Volume::find()
             ->where(['user_id'=>$id])
+            ->andWhere(['product_id'=>$product])
+            ->andWhere("MONTH(date) = {$date[1]} ")
+            ->andWhere("YEAR(date) = {$date[0]}")
             ->indexBy('id')
             ->all();
 

@@ -2,10 +2,11 @@
 	use yii\bootstrap\Nav;
 ?>
 <?= Nav::widget([
-        'options' => ['class' => 'nav-pills navbar-right'],
+        'options' => ['class' => 'nav-pills'],
         'items' => [
         	['label' => 'RFBS', 'url' => ['/rfbs/index']],
-            ['label' => 'Grid', 'url' => ['/rfbs/grid']],
+            ['label' => 'Data Grid', 'url' => ['/rfbs/grid']],
+            ['label' => 'Contributions', 'url' => ['/rfbs/grid-update']],
             ['label' => 'Generate', 'url' => ['/rfbs/generate']],
         ],
     ]);

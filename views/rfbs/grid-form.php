@@ -3,12 +3,17 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'RFBS - Create Contribution';
+$this->title = 'Data Grid';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rfbs-form">
-<?= $this->render('_menu') ?>
-    
+    <div class="pull-right">
+        <?= $this->render('_menu') ?>
+    </div>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <hr>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?php $count = 0; ?>

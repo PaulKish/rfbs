@@ -3,11 +3,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'RFBS - Update Contribution';
+$this->title = 'Contribution - Update';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rfbs-form-update">
-<?= $this->render('_menu') ?>
+    <div class="pull-right">
+        <?= $this->render('_menu') ?>
+    </div>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <hr>
     
     <?php $form = ActiveForm::begin(); ?>
 

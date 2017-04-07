@@ -14,7 +14,8 @@ class GridForm extends Model
     public function rules()
     {
         return [
-            [['commodity', 'contributor', 'date'], 'required'],
+            [['commodity', 'contributor', 'date'], 'required','on'=>'create'],
+            [['commodity', 'date'], 'required','on'=>'update'],
         ];
     }
 }
