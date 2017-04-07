@@ -10,3 +10,5 @@
         ],
     ]);
 ?>
+<div class="clearfix"></div>
+<hr>

@@ -38,7 +38,7 @@ class Volume extends \yii\db\ActiveRecord
         return [
             [['user_id', 'product_id', 'type_id', 'active'], 'integer'],
             [['volume'], 'number'],
-            [['date', 'time'], 'safe'],
+            [['date', 'time','type_id','volume'], 'safe'],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Commodity::className(), 'targetAttribute' => ['product_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contributor::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
