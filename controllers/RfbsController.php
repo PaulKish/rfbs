@@ -90,7 +90,8 @@ class RfbsController extends \yii\web\Controller
                     $grid->active = 1;
                     $grid->save(false);
                 }
-                //return $this->redirect('index');
+                
+                return $this->redirect('index');
             }
 
             return $this->render('grid-form',[
@@ -110,7 +111,45 @@ class RfbsController extends \yii\web\Controller
      */ 
     public function actionIndex()
     {
+        Yii::$app->session->setFlash('success', 'bla bla 2');
         return $this->render('index');
+    }
+
+    /**
+     *  Update contributor records
+     */ 
+    public function actionUpdate($id){
+        $model = new GridForm;
+
+        // get assignments for role
+        $contributor = Contributor::findOne($id);
+        $assignments = Assignment::find()->where(['role_id'=>$contributor->role_id])->all();
+
+        // bad stuff
+        $count = Assignment::find()->where(['role_id'=>$contributor->role_id])->count();
+        for($i = 0; $i < $count; $i++){
+            $gridModel[$i] = new Volume();
+        }
+
+        // multiple madness
+        if (Model::loadMultiple($gridModel, Yii::$app->request->post()) && Model::validateMultiple($gridModel)) {
+            foreach ($gridModel as $grid) {
+                $grid->date = $model->date;
+                $grid->user_id = $model->contributor;
+                $grid->product_id = $model->commodity;
+                $grid->active = 1;
+                $grid->save(false);
+            }
+            
+            return $this->redirect('index');
+        }
+
+        return $this->render('grid-form-update',[
+            'contributor' => $contributor,
+            'assignments' => $assignments,
+            'model' => $model,
+            'gridModel' => $gridModel
+        ]); 
     }
 
 }
