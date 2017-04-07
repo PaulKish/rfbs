@@ -44,7 +44,10 @@ AppAsset::register($this);
 		    echo Nav::widget([
 		        'options' => ['class' => 'navbar-nav navbar-right'],
 		        'items' => [
-		            ['label' => 'Home', 'url' => ['/site/index']],
+		            ['label' => 'Home', 
+		            	'url' => ['/site/index'],
+		            	'linkOptions' => ['target' => '_blank']
+		            ],
 		            ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
 				        'url' => ['/user/security/logout'],
 				        'linkOptions' => ['data-method' => 'post']

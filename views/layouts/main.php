@@ -51,11 +51,16 @@ AppAsset::register($this);
                         'url' => ['/user/security/login'],
                         'visible'=> Yii::$app->user->isGuest
                     ],
+                    ['label' => 'Admin',
+                        'url' => ['/rfbs/index'],
+                        'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
+                        'linkOptions' => ['data-method' => 'post'],
+                    ],
                     ['label' => 'Sign out',
                         'url' => ['/user/security/logout'],
                         'visible' => !Yii::$app->user->isGuest,
                         'linkOptions' => ['data-method' => 'post'],
-                    ]
+                    ],
                 ],
             ]);
             NavBar::end();
