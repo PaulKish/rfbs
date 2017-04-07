@@ -2,9 +2,8 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dosamigos\datepicker\DatePicker;
 
-$this->title = 'RFBS - Grid';
+$this->title = 'RFBS - Create Contribution';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rfbs-form">
@@ -12,20 +11,20 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php
-        $count = 0;
-        // generate list of input boxes 
-        foreach ($assignments as $assignment) {
-            $type = $assignment->type; // label for generated field
-            
-            echo $form->field($gridModel[$count], "[$count]volume")->textInput(['maxlength' => true])->label($type->type);
+    <?php $count = 0; ?>
+    <?php foreach ($assignments as $assignment): ?>
+        <?php $type = $assignment->type ?>
 
-            echo $form->field($gridModel[$count], "[$count]type_id")->hiddenInput(['value'=>$type->id])->label(false);
+        <?= $form->field($gridModel[$count], "[$count]volume")
+            ->textInput(['maxlength' => true])
+            ->label($type->type) ?>
 
-            $count++;
-        }
-        
-    ?>
+        <?= $form->field($gridModel[$count], "[$count]type_id")
+            ->hiddenInput(['value'=>$type->id])
+            ->label(false) ?>
+
+        <?php $count++ ?>
+    <?php endforeach; ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

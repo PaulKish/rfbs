@@ -40,6 +40,14 @@ class RfbsController extends \yii\web\Controller
     }
 
     /**
+     *  Index, shows generated sheets
+     */ 
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+    /**
      *  Generate Sheet
      */ 
     public function actionGenerate()
@@ -48,7 +56,7 @@ class RfbsController extends \yii\web\Controller
     }
 
     /**
-     *  Grid input
+     *  Grid filter
      */ 
     public function actionGrid()
     {
@@ -105,22 +113,31 @@ class RfbsController extends \yii\web\Controller
             ]);
 
         } else {
-            
+            return $this->redirect('index');
         }
     }
 
     /**
-     *  Index, shows generated sheets
+     *  Grid update
      */ 
-    public function actionIndex()
+    public function actionGridUpdate()
     {
-        return $this->render('index');
+        $model = new GridForm;
+
+        $commodities = ArrayHelper::map(Commodity::find()->all(),'id','commodity');
+        $contributors = ArrayHelper::map(Contributor::find()->all(),'id','name');
+
+        return $this->render('grid',[
+            'commodities' => $commodities,
+            'contributors' => $contributors,
+            'model'=> $model
+        ]);
     }
 
     /**
      *  Update contributor records
      */ 
-    public function actionUpdate($id){
+    public function actionGridFormUpdate($id){
         // pull records
         $gridModel = Volume::find()
             ->where(['user_id'=>$id])
