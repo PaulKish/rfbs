@@ -85,7 +85,8 @@ class ContributorController extends Controller
         $model = new contributor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Record added');
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
             $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
@@ -110,7 +111,8 @@ class ContributorController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Record updated');
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
             $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');

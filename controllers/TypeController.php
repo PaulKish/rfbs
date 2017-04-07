@@ -84,7 +84,8 @@ class TypeController extends Controller
         $model = new type();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Record added');
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
             $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
@@ -109,7 +110,8 @@ class TypeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Record updated');
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
             $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
