@@ -38,7 +38,7 @@ AppAsset::register($this);
 		        'brandLabel' => Yii::$app->name,
 		        'brandUrl' => Yii::$app->homeUrl,
 		        'options' => [
-		            'class' => 'navbar-inverse navbar-fixed-top',
+		            'class' => 'navbar-default navbar-fixed-top',
 		        ],
 		    ]);
 		    echo Nav::widget([
@@ -69,7 +69,7 @@ AppAsset::register($this);
 		        <?= Alert::widget() ?>
 
 		        <div class="row">
-		        	<div class="col-md-2">
+		        	<div class="col-md-3">
 		        		<div class="panel panel-default">
   							<div class="panel-body">
 				        		<?= Nav::widget([
@@ -91,7 +91,7 @@ AppAsset::register($this);
 							</div>
 						</div>
 		        	</div>
-		        	<div class="col-md-10">
+		        	<div class="col-md-9">
 		        		<div class="panel panel-default">
   							<div class="panel-body">
 		        				<?= $content ?>

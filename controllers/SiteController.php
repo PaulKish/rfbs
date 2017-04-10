@@ -8,6 +8,7 @@ use dektrium\user\filters\AccessRule;
 use yii\web\Controller;
 use app\models\Country;
 use app\models\Commodity;
+use app\models\FilterForm;
 use yii\helpers\Url;
 
 class SiteController extends Controller
@@ -69,10 +70,17 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionReport()
+    public function actionReport($product = 1)
     {
         $countries = Country::find()->where(['active'=>1])->all();
         $commodities = Commodity::find()->where(['active'=>1])->all();
+
+        $model = new FilterForm;
+
+        $date = date('Y-m');
+        if ($model->load(Yii::$app->request->post())){
+            $date = $model->date;
+        }
 
         $menu = [];
         foreach ($commodities as $commodity) {
@@ -84,7 +92,10 @@ class SiteController extends Controller
 
         return $this->render('report',[
             'countries' => $countries,
-            'menu' => $menu
+            'menu' => $menu,
+            'product' => $product,
+            'date' => $date,
+            'model' => $model
         ]);
     }
 

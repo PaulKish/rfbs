@@ -85,4 +85,28 @@ class Volume extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
+
+    public static function typeVolume($type,$product,$date=NULL,$country=NULL){
+        if($date == NULL){
+            $date = date('Y-m');
+        }
+
+        $date = explode('-',$date);
+
+        $volume = Volume::find()
+            ->where(['type_id'=>$type])
+            ->andWhere(['product_id'=>$product])
+            ->andWhere("MONTH(volume.date) = {$date[1]} ")
+            ->andWhere("YEAR(volume.date) = {$date[0]}")
+            ->andWhere(['volume.active'=>1])
+            ->joinWith(['user' => function ($q) use ($country) {
+                $q->andFilterWhere(['=', 'contributor.country_id',$country]);
+            }])
+            ->sum('volume');
+
+        if($volume == NULL)
+            return 0; 
+        
+        return $volume;
+    }
 }
