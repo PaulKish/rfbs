@@ -98,7 +98,7 @@ class Volume extends \yii\db\ActiveRecord
             ->andWhere(['product_id'=>$product])
             ->andWhere("MONTH(volume.date) = {$date[1]} ")
             ->andWhere("YEAR(volume.date) = {$date[0]}")
-            ->andWhere(['volume.active'=>1])
+            //->andWhere(['volume.active'=>1])
             ->joinWith(['user' => function ($q) use ($country) {
                 $q->andFilterWhere(['=', 'contributor.country_id',$country]);
             }])
@@ -106,7 +106,7 @@ class Volume extends \yii\db\ActiveRecord
 
         if($volume == NULL)
             return 0; 
-        
+
         return $volume;
     }
 }
