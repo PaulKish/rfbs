@@ -10,6 +10,7 @@ use app\models\Country;
 use app\models\Commodity;
 use app\models\FilterForm;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -70,31 +71,21 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionReport($product = 1)
+    public function actionReport()
     {
         $countries = Country::find()->where(['active'=>1])->all();
-        $commodities = Commodity::find()->where(['active'=>1])->all();
+        $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
 
         $model = new FilterForm;
 
-        $date = date('Y-m');
-        if ($model->load(Yii::$app->request->post())){
-            $date = $model->date;
-        }
-
-        $menu = [];
-        foreach ($commodities as $commodity) {
-            $menu[] = [
-                'label' => $commodity->commodity, 
-                'url' => Url::to(['site/report','product'=>$commodity->id])
-            ];
+        if (!$model->load(Yii::$app->request->post())){
+            $model->date = date('Y-m');
+            $model->commodity = 1;
         }
 
         return $this->render('report',[
             'countries' => $countries,
-            'menu' => $menu,
-            'product' => $product,
-            'date' => $date,
+            'commodities'=>$commodities,
             'model' => $model
         ]);
     }

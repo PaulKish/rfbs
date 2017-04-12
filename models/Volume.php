@@ -93,6 +93,8 @@ class Volume extends \yii\db\ActiveRecord
 
         $date = explode('-',$date);
 
+        $formatter = \Yii::$app->formatter;
+
         $volume = Volume::find()
             ->where(['type_id'=>$type])
             ->andWhere(['product_id'=>$product])
@@ -105,8 +107,8 @@ class Volume extends \yii\db\ActiveRecord
             ->sum('volume');
 
         if($volume == NULL)
-            return 0; 
+            $volume = 0;
 
-        return $volume;
+        return $formatter->asDecimal($volume,2);
     }
 }
