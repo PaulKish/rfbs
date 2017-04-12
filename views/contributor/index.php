@@ -29,14 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class='pull-right'>{summary}</div>",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'username',
-            'email:email',
-            'telephone',
             'organization',
             'role.role',
             'country.country',
-            // 'date',
-            'active:boolean',
+            'date',
+            //'active:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

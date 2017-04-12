@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Contribution - Update';
+$this->title = 'Contribution | '.$contributor;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rfbs-form-update">

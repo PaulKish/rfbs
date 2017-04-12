@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Contributions';
+$this->title = 'Contributions | '.$commodity;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="volume-index">
@@ -33,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.organization',
             'user.country.country',
             'product.commodity',
-
+            [
+                'attribute'=>'date',
+                'format'=> ['date', 'php:F, Y']
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Update',
@@ -47,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
+            
     ]); ?>
 
     <?php Pjax::end(); ?>

@@ -139,9 +139,12 @@ class RfbsController extends \yii\web\Controller
                 'pagination' => ['pagesize'=>10]
             ]);
 
+            $commodity = Commodity::findOne($model->commodity)->commodity;
+
             return $this->render('grid-index', [
                 'dataProvider' => $dataProvider,
-                'gridModel'=> $model
+                'gridModel'=> $model,
+                'commodity'=>$commodity
             ]);
         }
 
@@ -168,6 +171,8 @@ class RfbsController extends \yii\web\Controller
             ->indexBy('id')
             ->all();
 
+        $contributor = Contributor::findOne($id)->organization;
+
         // multiple madness
         if (Model::loadMultiple($gridModel, Yii::$app->request->post()) && Model::validateMultiple($gridModel)) {
             foreach ($gridModel as $grid) {
@@ -181,7 +186,8 @@ class RfbsController extends \yii\web\Controller
         }
 
         return $this->render('grid-form-update',[
-            'gridModel' => $gridModel
+            'gridModel' => $gridModel,
+            'contributor' => $contributor
         ]); 
     }
 
