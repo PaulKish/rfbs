@@ -5,6 +5,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 use yii\helpers\Html;
+use yii\web\View;
 
 $this->title = 'Report';
 $this->params['breadcrumbs'][] = $this->title;
@@ -37,108 +38,36 @@ $this->params['breadcrumbs'][] = $this->title;
 				    <hr>
 				    
 			  		<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-					    <li role="presentation" class="active">
-					    	<a href="#regional" aria-controls="regional" role="tab" data-toggle="tab">Regional</a>
-					    </li>
-					    <?php foreach($countries as $country): ?>
+					<ul id="countries" class="nav nav-tabs" role="tablist">
+					    <?php foreach($countries as $key => $country): ?>
 					    <li role="presentation">
-					    	<a href="#<?= $country->country; ?>" aria-controls="<?= $country->country; ?>" role="tab" data-toggle="tab"><?= $country->country; ?></a>
+					    	<a href="#<?= $country; ?>" aria-controls="<?= $key; ?>" role="tab" data-toggle="tab"><?= $country; ?></a>
 					    </li>
 					    <?php endforeach; ?>
 					</ul>
 
 				  	<!-- Tab panes -->
 				  	<div class="tab-content">
-				    	<div role="tabpanel" class="tab-pane active" id="regional">
+				    	<?php foreach($countries as $key => $country): ?>
+				    	<div role="tabpanel" class="tab-pane" id="<?= $country; ?>">
 				    		<?php 
-								$strategic = Volume::typeVolume(1,$model->commodity,$model->date);
-								$commercial = Volume::typeVolume(2,$model->commodity,$model->date);
+				    			$strategic = Volume::typeVolume(1,$model->commodity,$model->date,$key);
+								$commercial = Volume::typeVolume(2,$model->commodity,$model->date,$key);
 								$stock_reserve = \Yii::$app->formatter->asDecimal($strategic + $commercial,2);
 
-								$household = Volume::typeVolume(3,$model->commodity,$model->date);
-								$processors = Volume::typeVolume(4,$model->commodity,$model->date);
-								$warehouses = Volume::typeVolume(5,$model->commodity,$model->date);
-								$relief = Volume::typeVolume(6,$model->commodity,$model->date);
+								$household = Volume::typeVolume(3,$model->commodity,$model->date,$key);
+								$processors = Volume::typeVolume(4,$model->commodity,$model->date,$key);
+								$warehouses = Volume::typeVolume(5,$model->commodity,$model->date,$key);
+								$relief = Volume::typeVolume(6,$model->commodity,$model->date,$key);
 								$stock = \Yii::$app->formatter->asDecimal($strategic + $commercial + $household + $processors + $warehouses + $relief,2);
 
-								$eac = Volume::typeVolume(7,$model->commodity,$model->date);
-								$comesa = Volume::typeVolume(8,$model->commodity,$model->date);
-								$world = Volume::typeVolume(9,$model->commodity,$model->date);
+								$eac = Volume::typeVolume(7,$model->commodity,$model->date,$key);
+								$comesa = Volume::typeVolume(8,$model->commodity,$model->date,$key);
+								$world = Volume::typeVolume(9,$model->commodity,$model->date,$key);
 								$import = \Yii::$app->formatter->asDecimal($eac + $comesa + $world,2);
 
-								$production = Volume::typeVolume(10,$model->commodity,$model->date);
-								$loss = Volume::typeVolume(11,$model->commodity,$model->date);
-							?>
-
-
-				    		<?= $this->render('_supply',[
-				    			'strategic'		=>$strategic,
-								'commercial'	=>$commercial,
-								'stock_reserve'	=>$stock_reserve,
-								'household'		=>$household,
-								'processors'	=>$processors,
-								'warehouses'	=>$warehouses,
-								'relief'		=>$relief,
-								'stock'			=>$stock,
-								'eac'			=>$eac,
-								'comesa'		=>$comesa,
-								'world'			=>$world,
-								'import'		=>$import,
-								'production'	=>$production,
-								'loss'			=>$loss
-				    		]) ?>
-
-				    		<?php 
-				    			$total_stock = \Yii::$app->formatter->asDecimal(($stock + $import + $production) - $loss,2);  
-								$national = Volume::typeVolume(12,$model->commodity,$model->date);
-								$seed = Volume::typeVolume(13,$model->commodity,$model->date);
-								$feed = Volume::typeVolume(14,$model->commodity,$model->date);
-								$industrial = Volume::typeVolume(15,$model->commodity,$model->date);
-
-								$export_eac = Volume::typeVolume(16,$model->commodity,$model->date);
-								$export_comesa = Volume::typeVolume(17,$model->commodity,$model->date);
-								$export_world = Volume::typeVolume(18,$model->commodity,$model->date);
-								$export = $export_eac + $export_comesa + $export_world;
-
-								$available_stock = \Yii::$app->formatter->asDecimal($stock - ($national + $seed + $feed + $industrial + $export),2);
-							?>
-
-				    		<?= $this->render('_utilization',[
-				    			'total_stock' 		=> $total_stock,
-				    			'national'			=> $national,
-								'seed'				=> $seed,
-								'feed'				=> $feed,
-								'industrial'		=> $industrial,
-								'export_eac'		=> $export_eac,
-								'export_comesa'		=> $export_comesa,
-								'export_world'		=> $export_world,
-								'export'			=> $export,
-								'available_stock'	=> $available_stock
-				    		]) ?>
-
-				    	</div>
-
-				    	<?php foreach($countries as $country): ?>
-				    	<div role="tabpanel" class="tab-pane" id="<?= $country->country; ?>">
-				    		<?php 
-				    			$strategic = Volume::typeVolume(1,$model->commodity,$model->date,$country->id);
-								$commercial = Volume::typeVolume(2,$model->commodity,$model->date,$country->id);
-								$stock_reserve = $strategic + $commercial;
-
-								$household = Volume::typeVolume(3,$model->commodity,$model->date,$country->id);
-								$processors = Volume::typeVolume(4,$model->commodity,$model->date,$country->id);
-								$warehouses = Volume::typeVolume(5,$model->commodity,$model->date,$country->id);
-								$relief = Volume::typeVolume(6,$model->commodity,$model->date,$country->id);
-								$stock = $strategic + $commercial + $household + $processors + $warehouses + $relief;
-
-								$eac = Volume::typeVolume(7,$model->commodity,$model->date,$country->id);
-								$comesa = Volume::typeVolume(8,$model->commodity,$model->date,$country->id);
-								$world = Volume::typeVolume(9,$model->commodity,$model->date,$country->id);
-								$import = $eac + $comesa + $world;
-
-								$production = Volume::typeVolume(10,$model->commodity,$model->date,$country->id);
-								$loss = Volume::typeVolume(11,$model->commodity,$model->date,$country->id);
+								$production = Volume::typeVolume(10,$model->commodity,$model->date,$key);
+								$loss = Volume::typeVolume(11,$model->commodity,$model->date,$key);
 				    		?>
 
 				    		<?= $this->render('_supply',[
@@ -159,18 +88,18 @@ $this->params['breadcrumbs'][] = $this->title;
 				    		]) ?>
 
 				    		<?php 
-				    			$total_stock = ($stock + $import + $production) - $loss;  
-								$national = Volume::typeVolume(12,$model->commodity,$model->date,$country->id);
-								$seed = Volume::typeVolume(13,$model->commodity,$model->date,$country->id);
-								$feed = Volume::typeVolume(14,$model->commodity,$model->date,$country->id);
-								$industrial = Volume::typeVolume(15,$model->commodity,$model->date,$country->id);
+				    			$total_stock = \Yii::$app->formatter->asDecimal(($stock + $import + $production) - $loss,2);  
+								$national = Volume::typeVolume(12,$model->commodity,$model->date,$key);
+								$seed = Volume::typeVolume(13,$model->commodity,$model->date,$key);
+								$feed = Volume::typeVolume(14,$model->commodity,$model->date,$key);
+								$industrial = Volume::typeVolume(15,$model->commodity,$model->date,$key);
 
-								$export_eac = Volume::typeVolume(16,$model->commodity,$model->date,$country->id);
-								$export_comesa = Volume::typeVolume(17,$model->commodity,$model->date,$country->id);
-								$export_world = Volume::typeVolume(18,$model->commodity,$model->date,$country->id);
-								$export = $export_eac + $export_comesa + $export_world;
+								$export_eac = Volume::typeVolume(16,$model->commodity,$model->date,$key);
+								$export_comesa = Volume::typeVolume(17,$model->commodity,$model->date,$key);
+								$export_world = Volume::typeVolume(18,$model->commodity,$model->date,$key);
+								$export = \Yii::$app->formatter->asDecimal($export_eac + $export_comesa + $export_world,2);
 
-								$available_stock = $stock - ($national + $seed + $feed + $industrial + $export);
+								$available_stock = \Yii::$app->formatter->asDecimal($stock - ($national + $seed + $feed + $industrial + $export),2);
 							?>
 
 				    		<?= $this->render('_utilization',[
@@ -193,3 +122,8 @@ $this->params['breadcrumbs'][] = $this->title;
     	</div>
     </div>
 </div>
+<?php
+$script = <<< JS
+    $('#countries a:first').tab('show');
+JS;
+$this->registerJs($script,View::POS_END);

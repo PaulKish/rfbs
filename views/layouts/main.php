@@ -47,7 +47,6 @@ MainAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Report', 'url' => ['/site/report']],
-                    ['label' => 'Contact Us', 'url' => ['/site/contact']],
                     ['label' => 'Sign in', 
                         'url' => ['/user/security/login'],
                         'visible'=> Yii::$app->user->isGuest

@@ -73,10 +73,12 @@ class SiteController extends Controller
      */
     public function actionReport()
     {
-        $countries = Country::find()->where(['active'=>1])->all();
+        $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
 
         $model = new FilterForm;
+
+        $countries = [ 0 => 'Regional'] + $countries;
 
         if (!$model->load(Yii::$app->request->post())){
             $model->date = date('Y-m');

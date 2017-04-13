@@ -91,6 +91,11 @@ class Volume extends \yii\db\ActiveRecord
             $date = date('Y-m');
         }
 
+        // this is to accomodate adding a regional country with id 0 
+        if($country == 0){
+            $country = NULL;
+        }
+
         $date = explode('-',$date);
 
         $formatter = \Yii::$app->formatter;
