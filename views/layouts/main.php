@@ -79,7 +79,10 @@ MainAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left">&copy; <?= Yii::$app->name ?> <?= date('Y') ?></p>
+                <p class="pull-left">
+                    &copy; <?= Yii::$app->name ?>  <?= date('Y') ?>
+                    | For any issues please write to <?= Html::mailto('ratin@eagc.org') ?>
+                </p>
 
                 <p class="pull-right"><?= Yii::powered() ?></p>
             </div>

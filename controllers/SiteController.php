@@ -9,6 +9,8 @@ use yii\web\Controller;
 use app\models\Country;
 use app\models\Commodity;
 use app\models\FilterForm;
+use app\models\Volume;
+use app\models\Type;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
@@ -53,7 +55,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $date = date('Y-m');
+        $commodity = 6;
+        $types = Type::find()->where(['category_id'=>2])->all();
+        $supply = [];
+
+        foreach ($types as $type) {
+            // build array for pie chart
+            $supply[] = [
+                'name' => $type->type,
+                'y' => (float) Volume::typeVolume($type->id,$commodity,$date)
+            ];            
+        }
+
+        $types = Type::find()->where(['category_id'=>1])->all();
+        $utilization = [];
+
+        foreach ($types as $type) {
+            // build array for pie chart
+            $utilization[] = [
+                'name' => $type->type,
+                'y' => (float) Volume::typeVolume($type->id,$commodity,$date)
+            ];            
+        }
+
+        return $this->render('index',['supply'=>$supply,'utilization'=>$utilization]);
     }
 
     /**
