@@ -120,7 +120,7 @@ class Volume extends \yii\db\ActiveRecord
     /**
      * Category volume
      */ 
-    public static function catVolume($category,$product,$date=NULL,$country=NULL){
+    public static function catVolume($category,$product,$date=NULL,$country=NULL,$end_date=NULL){
         if($date == NULL){
             $date = date('Y-m');
         }
