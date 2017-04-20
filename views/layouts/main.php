@@ -93,7 +93,7 @@ MainAsset::register($this);
             <div class="container">
                 <p class="pull-left">
                     &copy; <?= Yii::$app->name ?>  <?= date('Y') ?>
-                    | For any issues please write to <?= Html::mailto('ratin@eagc.org') ?>
+                    | For any issues please write to <?= Html::mailto('rfbs@eagc.org') ?>
                 </p>
 
                 <p class="pull-right"><?= Yii::powered() ?></p>

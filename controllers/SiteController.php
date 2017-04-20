@@ -55,31 +55,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $model = new FilterForm;
+
         $date = date('Y-m');
-        $commodity = 6;
-        $types = Type::find()->where(['category_id'=>2])->all();
-        $supply = [];
+        $model->date = $date;
 
-        foreach ($types as $type) {
-            // build array for pie chart
-            $supply[] = [
-                'name' => $type->type,
-                'y' => (float) Volume::typeVolume($type->id,$commodity,$date)
-            ];            
+        $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
+        $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
+    
+        if (!$model->load(Yii::$app->request->get())){
+            $model->commodity = 1;
+            $model->country = 0;
         }
 
-        $types = Type::find()->where(['category_id'=>1])->all();
-        $utilization = [];
-
-        foreach ($types as $type) {
-            // build array for pie chart
-            $utilization[] = [
-                'name' => $type->type,
-                'y' => (float) Volume::typeVolume($type->id,$commodity,$date)
-            ];            
-        }
-
-        return $this->render('index',['supply'=>$supply,'utilization'=>$utilization]);
+        return $this->render('index',[
+            'model'=>$model,
+            'countries'=>$countries,
+            'commodities'=>$commodities
+        ]);
     }
 
     /**
@@ -89,7 +82,18 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('index');
+        return $this->render('about');
+    }
+
+
+    /**
+     * Displays contact.
+     *
+     * @return string
+     */
+    public function actionContact()
+    {
+        return $this->render('contact');
     }
 
     /**
@@ -108,6 +112,7 @@ class SiteController extends Controller
 
         if (!$model->load(Yii::$app->request->post())){
             $model->date = date('Y-m');
+            $model->end_date = date('Y-m');
             $model->commodity = 1;
         }
 
@@ -116,15 +121,5 @@ class SiteController extends Controller
             'commodities'=>$commodities,
             'model' => $model
         ]);
-    }
-
-    /**
-     * Displays contact.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        return $this->render('index');
     }
 }

@@ -8,12 +8,15 @@ use yii\base\Model;
 class FilterForm extends Model
 {
     public $date;
+    public $end_date;
     public $commodity;
+    public $country;
 
     public function rules()
     {
         return [
-            [['date','commodity'], 'required'],
+            [['commodity'], 'required'],
+            [['country','date','end_date'],'safe']
         ];
     }
 }

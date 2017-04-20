@@ -86,7 +86,41 @@ class Volume extends \yii\db\ActiveRecord
         return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
 
-    public static function typeVolume($type,$product,$date=NULL,$country=NULL){
+    public static function typeVolume($type,$product,$date=NULL,$country=NULL,$end_date = NULL){
+        if($date == NULL){
+            $date = date('Y-m-01');
+        }
+
+        if($end_date == NULL){
+            $end_date = date('Y-m-t'); // this will fail after 2038
+        }
+
+        // this is to accomodate adding a regional country with id 0 
+        if($country == 0){
+            $country = NULL;
+        }
+
+        $formatter = \Yii::$app->formatter;
+
+        $volume = Volume::find()
+            ->where(['type_id'=>$type])
+            ->andWhere(['product_id'=>$product])
+            ->andWhere(['between','volume.date',$date,$end_date])
+            ->joinWith(['user' => function ($q) use ($country) {
+                $q->andFilterWhere(['=', 'contributor.country_id',$country]);
+            }])
+            ->sum('volume');
+
+        if($volume == NULL)
+            $volume = 0;
+
+        return $formatter->asDecimal($volume,2);
+    }
+
+    /**
+     * Category volume
+     */ 
+    public static function catVolume($category,$product,$date=NULL,$country=NULL){
         if($date == NULL){
             $date = date('Y-m');
         }
@@ -101,14 +135,17 @@ class Volume extends \yii\db\ActiveRecord
         $formatter = \Yii::$app->formatter;
 
         $volume = Volume::find()
-            ->where(['type_id'=>$type])
-            ->andWhere(['product_id'=>$product])
+            ->where(['product_id'=>$product])
             ->andWhere("MONTH(volume.date) = {$date[1]} ")
             ->andWhere("YEAR(volume.date) = {$date[0]}")
             //->andWhere(['volume.active'=>1])
-            ->joinWith(['user' => function ($q) use ($country) {
-                $q->andFilterWhere(['=', 'contributor.country_id',$country]);
-            }])
+            ->joinWith(
+                ['user' => function ($q) use ($country) {
+                    $q->andFilterWhere(['=', 'contributor.country_id',$country]);
+                },'type' => function ($q) use ($category) {
+                    $q->andWhere(['=', 'type.category_id',$category]);
+                }]
+            )
             ->sum('volume');
 
         if($volume == NULL)
