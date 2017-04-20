@@ -111,8 +111,8 @@ class SiteController extends Controller
         $countries = [ 0 => 'Regional'] + $countries;
 
         if (!$model->load(Yii::$app->request->post())){
-            $model->date = date('Y-m');
-            $model->end_date = date('Y-m');
+            $model->date = date('Y-m-01');
+            $model->end_date = date('Y-m-t');
             $model->commodity = 1;
         }
 
