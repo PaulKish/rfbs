@@ -46,7 +46,8 @@ MainAsset::register($this);
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Report', 'url' => ['/site/report']],
+                    ['label' => 'Contributor Report', 'url' => ['/site/report']],
+                    ['label' => 'Contact', 'url' => ['/site/contact']],
                     ['label' => 'Account', 
                         'items'=> [
                             [
@@ -58,18 +59,19 @@ MainAsset::register($this);
                                 'label' => 'Register',
                                 'url' => ['/user/register'],
                                 'visible'=> Yii::$app->user->isGuest
-                            ]
+                            ],
+                            [
+                                'label' => 'Admin',
+                                'url' => ['/rfbs/index'],
+                                'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
+                                'linkOptions' => ['data-method' => 'post'],
+                            ],
+                            ['label' => 'Sign out',
+                                'url' => ['/user/security/logout'],
+                                'visible' => !Yii::$app->user->isGuest,
+                                'linkOptions' => ['data-method' => 'post'],
+                            ],
                         ]
-                    ],
-                    ['label' => 'Admin',
-                        'url' => ['/rfbs/index'],
-                        'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
-                        'linkOptions' => ['data-method' => 'post'],
-                    ],
-                    ['label' => 'Sign out',
-                        'url' => ['/user/security/logout'],
-                        'visible' => !Yii::$app->user->isGuest,
-                        'linkOptions' => ['data-method' => 'post'],
                     ],
                 ],
             ]);

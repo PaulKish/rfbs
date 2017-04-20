@@ -44,17 +44,37 @@ AppAsset::register($this);
 		    echo Nav::widget([
 		        'options' => ['class' => 'navbar-nav navbar-right'],
 		        'items' => [
-		            ['label' => 'Home', 
+		        	['label' => 'Dashboard', 
+		            	'url' => ['/rfbs/index'],
+		            ],
+		            ['label' => 'Main Site', 
 		            	'url' => ['/site/index'],
 		            	'linkOptions' => ['target' => '_blank']
 		            ],
-		            ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
-				        'url' => ['/user/security/logout'],
-				        'linkOptions' => ['data-method' => 'post']
-				    ],
-				    ['label' => 'Sign in', 
-                        'url' => ['/user/security/login'],
-                        'visible'=> Yii::$app->user->isGuest
+		            ['label' => 'Account', 
+                        'items'=> [
+                            [
+                                'label' => 'Login',
+                                'url' => ['/user/security/login'],
+                                'visible'=> Yii::$app->user->isGuest
+                            ],
+                            [
+                                'label' => 'Register',
+                                'url' => ['/user/register'],
+                                'visible'=> Yii::$app->user->isGuest
+                            ],
+                            [
+                                'label' => 'Admin',
+                                'url' => ['/rfbs/index'],
+                                'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
+                                'linkOptions' => ['data-method' => 'post'],
+                            ],
+                            ['label' => 'Sign out',
+                                'url' => ['/user/security/logout'],
+                                'visible' => !Yii::$app->user->isGuest,
+                                'linkOptions' => ['data-method' => 'post'],
+                            ],
+                        ]
                     ],
 				],
 		    ]);
@@ -75,16 +95,12 @@ AppAsset::register($this);
 				        		<?= Nav::widget([
 								        'options' => ['class' => 'nav-pills nav-stacked'],
 								        'items' => [
-								        	['label' => 'RFBS', 'url' => ['/rfbs/index']],
-								            ['label' => 'Assignment', 'url' => ['/assignment/index']],
-								            ['label' => 'Category', 'url' => ['/category/index']],
-								            ['label' => 'Commodity', 'url' => ['/commodity/index']],
-								            ['label' => 'Contributor', 'url' => ['/contributor/index']],
-								            ['label' => 'Country', 'url' => ['/country/index']],
-								            ['label' => 'Group', 'url' => ['/group/index']],
-								            ['label' => 'Role', 'url' => ['/role/index']],
-								            ['label' => 'Type', 'url' => ['/type/index']],
-								            ['label' => 'Volume', 'url' => ['/volume/index']]
+								        	['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
+								            ['label' => 'Commodities', 'url' => ['/commodity/index']],
+								            ['label' => 'Contributors', 'url' => ['/contributor/index']],
+								            ['label' => 'Countries', 'url' => ['/country/index']],	
+								            ['label' => 'Volume', 'url' => ['/volume/index']],
+								            ['label' => 'Site Users', 'url' => ['/user/admin']]
 								        ],
 								    ]);
 								?>

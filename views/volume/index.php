@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <div class="pull-right">
-        <?= Html::a('Create Volume', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= $this->render('_menu') ?>
     </div>
 
     <?php Pjax::begin(); ?>

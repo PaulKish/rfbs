@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rfbs-form-update">
     <div class="pull-right">
-        <?= $this->render('_menu') ?>
+        <?= $this->render('/volume/_menu') ?>
     </div>
 
     <h1><?= Html::encode($this->title) ?></h1>

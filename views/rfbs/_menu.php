@@ -4,12 +4,11 @@
 <?= Nav::widget([
         'options' => ['class' => 'nav-pills'],
         'items' => [
-        	['label' => 'RFBS', 'url' => ['/rfbs/index']],
-            ['label' => 'Data Grid', 'url' => ['/rfbs/grid']],
-            ['label' => 'Contributions', 'url' => ['/rfbs/grid-update']],
-            ['label' => 'Generate', 'url' => ['/rfbs/generate']],
+            ['label' => 'Assignment', 'url' => ['/assignment/index']],
+			['label' => 'Category', 'url' => ['/category/index']],
+			['label' => 'Role', 'url' => ['/role/index']],
+			['label' => 'Type', 'url' => ['/type/index']],
         ],
     ]);
 ?>
 <div class="clearfix"></div>
-<hr>

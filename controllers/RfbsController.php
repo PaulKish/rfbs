@@ -49,14 +49,6 @@ class RfbsController extends \yii\web\Controller
     }
 
     /**
-     *  Generate Sheet
-     */ 
-    public function actionGenerate()
-    {
-        return $this->render('generate');
-    }
-
-    /**
      *  Grid filter
      */ 
     public function actionGrid()

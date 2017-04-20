@@ -12,6 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="volume-create">
 
+	<div class="pull-right">
+        <?= $this->render('_menu') ?>
+    </div>
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
     <hr>

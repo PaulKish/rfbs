@@ -12,6 +12,10 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="volume-update">
 
+	<div class="pull-right">
+        <?= $this->render('_menu') ?>
+    </div>
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
     <hr>

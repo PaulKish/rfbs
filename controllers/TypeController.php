@@ -10,7 +10,6 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
-use app\models\Group;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
 /**
@@ -88,12 +87,10 @@ class TypeController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
-            $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
             $categories = ArrayHelper::map(Category::find()->all(), 'id', 'category');
 
             return $this->render('create', [
                 'model' => $model,
-                'groups' => $groups,
                 'categories' => $categories
             ]);
         }
@@ -114,12 +111,10 @@ class TypeController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             // fetch drop down data
-            $groups = ArrayHelper::map(Group::find()->all(), 'id', 'group');
             $categories = ArrayHelper::map(Category::find()->all(), 'id', 'category');
 
             return $this->render('update', [
                 'model' => $model,
-                'groups' => $groups,
                 'categories' => $categories
             ]);
         }

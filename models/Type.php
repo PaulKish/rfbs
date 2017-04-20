@@ -10,11 +10,9 @@ use Yii;
  * @property int $id
  * @property string $type
  * @property int $category_id
- * @property int $group_id
  *
  * @property Assignment[] $assignments
  * @property Category $category
- * @property Group $group
  * @property Volume[] $volumes
  */
 class Type extends \yii\db\ActiveRecord
@@ -36,7 +34,6 @@ class Type extends \yii\db\ActiveRecord
             [['category_id', 'group_id'], 'integer'],
             [['type'], 'string', 'max' => 50],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::className(), 'targetAttribute' => ['group_id' => 'id']],
         ];
     }
 
@@ -48,8 +45,7 @@ class Type extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'type' => 'Type',
-            'category_id' => 'Category',
-            'group_id' => 'Group',
+            'category_id' => 'Category'
         ];
     }
 
@@ -67,14 +63,6 @@ class Type extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGroup()
-    {
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 
     /**
