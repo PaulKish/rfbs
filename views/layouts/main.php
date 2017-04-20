@@ -47,9 +47,19 @@ MainAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Report', 'url' => ['/site/report']],
-                    ['label' => 'Sign in', 
-                        'url' => ['/user/security/login'],
-                        'visible'=> Yii::$app->user->isGuest
+                    ['label' => 'Account', 
+                        'items'=> [
+                            [
+                                'label' => 'Login',
+                                'url' => ['/user/security/login'],
+                                'visible'=> Yii::$app->user->isGuest
+                            ],
+                            [
+                                'label' => 'Register',
+                                'url' => ['/user/register'],
+                                'visible'=> Yii::$app->user->isGuest
+                            ]
+                        ]
                     ],
                     ['label' => 'Admin',
                         'url' => ['/rfbs/index'],
