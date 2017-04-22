@@ -95,12 +95,12 @@ AppAsset::register($this);
 				        		<?= Nav::widget([
 								        'options' => ['class' => 'nav-pills nav-stacked'],
 								        'items' => [
-								        	['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
+								        	['label' => 'Volume', 'url' => ['/volume/index']],
 								            ['label' => 'Commodities', 'url' => ['/commodity/index']],
 								            ['label' => 'Contributors', 'url' => ['/contributor/index']],
-								            ['label' => 'Countries', 'url' => ['/country/index']],	
-								            ['label' => 'Volume', 'url' => ['/volume/index']],
-								            ['label' => 'Site Users', 'url' => ['/user/admin']]
+								            ['label' => 'Countries', 'url' => ['/country/index']],	  
+								            ['label' => 'Site Users', 'url' => ['/user/admin']],
+								            ['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
 								        ],
 								    ]);
 								?>
