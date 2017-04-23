@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -18,28 +19,36 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $this->render('_menu') ?>
     </div>
 
-    <?php Pjax::begin(); ?>
-
     <div class="clearfix"></div>
+
     <hr>
+    <?= $this->render('_search',['model'=>$searchModel]) ?>
+
+    <hr> 
+
+    <div class="pull-right">
+        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize']); ?>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'filterPosition' => 'header',
+        'filterSelector' => 'select[name="pagesize"]',
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'user.organization',
+            'user.country.country',
             'product.commodity',
             'volume',
             'type.type',
-            'date',
-            // 'time',
+            'date:date',
             'active:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
+
 </div>

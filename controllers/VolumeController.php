@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Volume;
+use app\models\VolumeSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,6 +56,14 @@ class VolumeController extends Controller
      */
     public function actionIndex()
     {
+        $searchModel = new VolumeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); 
+        /*
         $dataProvider = new ActiveDataProvider([
             'query' => volume::find()->orderBy('id desc'),
             'pagination' => ['pagesize'=>10]
@@ -62,7 +71,7 @@ class VolumeController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-        ]);
+        ]);*/
     }
 
     /**

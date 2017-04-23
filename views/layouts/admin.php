@@ -88,33 +88,29 @@ AppAsset::register($this);
 
 		        <?= Alert::widget() ?>
 
-		        <div class="row">
-		        	<div class="col-md-3">
-		        		<div class="panel panel-default">
-  							<div class="panel-body">
-				        		<?= Nav::widget([
-								        'options' => ['class' => 'nav-pills nav-stacked'],
-								        'items' => [
-								        	['label' => 'Volume', 'url' => ['/volume/index']],
-								            ['label' => 'Commodities', 'url' => ['/commodity/index']],
-								            ['label' => 'Contributors', 'url' => ['/contributor/index']],
-								            ['label' => 'Countries', 'url' => ['/country/index']],	  
-								            ['label' => 'Site Users', 'url' => ['/user/admin']],
-								            ['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
-								        ],
-								    ]);
-								?>
-							</div>
-						</div>
-		        	</div>
-		        	<div class="col-md-9">
-		        		<div class="panel panel-default">
-  							<div class="panel-body">
-		        				<?= $content ?>
-		        			</div>
-		        		</div>
-		        	</div>
-		        </div>
+
+        		<div class="panel panel-default">
+					<div class="panel-body">
+		        		<?= Nav::widget([
+						        'options' => ['class' => 'nav-pills'],
+						        'items' => [
+						        	['label' => 'Volume', 'url' => ['/volume/index']],
+						            ['label' => 'Commodities', 'url' => ['/commodity/index']],
+						            ['label' => 'Contributors', 'url' => ['/contributor/index']],
+						            ['label' => 'Countries', 'url' => ['/country/index']],	  
+						            ['label' => 'Site Users', 'url' => ['/user/admin']],
+						            ['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
+						        ],
+						    ]);
+						?>
+        			</div>
+        		</div>
+        		
+		        <div class="panel panel-default">
+					<div class="panel-body">
+        				<?= $content ?>
+        			</div>
+        		</div>
 		    </div>
 		</div>
 

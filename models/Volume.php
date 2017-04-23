@@ -22,6 +22,8 @@ use Yii;
  */
 class Volume extends \yii\db\ActiveRecord
 {
+    public $pagesize;
+    
     /**
      * @inheritdoc
      */

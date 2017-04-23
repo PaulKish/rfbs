@@ -31,6 +31,7 @@ class Commodity extends \yii\db\ActiveRecord
         return [
             [['active'], 'integer'],
             [['commodity'], 'string', 'max' => 50],
+            [['commodity'],'safe']
         ];
     }
 
