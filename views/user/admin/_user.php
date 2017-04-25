@@ -24,6 +24,7 @@
 		'Researcher/Student' => 'Researcher/Student',
 		'NGO' => 'NGO',
 		'Policy Maker/Government' => 'Policy Maker/Government',
+		'Contributor'=>'Contributor',
 		'Other' => 'Other'
 	],
 	['prompt'=>'--Please select--']) ?>

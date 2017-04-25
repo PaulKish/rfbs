@@ -60,16 +60,11 @@ class VolumeController extends Controller
         $searchModel = new VolumeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        //$types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
-        //$commodities = ArrayHelper::map(Commodity::find()->all(), 'id', 'commodity');
-        //$countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+        //dump(Yii::$app->user->identity->role);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            //'types' => $types,
-            //'commodities' => $commodities,
-            //'countries' => $countries
         ]); 
     }
 

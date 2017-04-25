@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
 use yii\base\Model;
@@ -13,6 +14,7 @@ use app\models\Contributor;
 use app\models\GridForm;
 use app\models\Assignment;
 use app\models\Volume;
+use app\models\FilterForm;
 use yii\helpers\ArrayHelper;
 
 
@@ -45,7 +47,22 @@ class RfbsController extends \yii\web\Controller
      */ 
     public function actionIndex()
     {
-        return $this->render('index');
+        $pagesize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize'):20;
+        $model = new FilterForm;
+        if ($model->load(Yii::$app->request->get())){
+
+        }
+        
+        $query = Contributor::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => ['pagesize'=>$pagesize]
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'model' => $model
+        ]);
     }
 
     /**

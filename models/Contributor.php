@@ -24,6 +24,7 @@ use Yii;
  */
 class Contributor extends \yii\db\ActiveRecord
 {
+    public $month;
     /**
      * @inheritdoc
      */
@@ -62,6 +63,7 @@ class Contributor extends \yii\db\ActiveRecord
             'country_id' => 'Country',
             'date' => 'Date',
             'active' => 'Active',
+            'volume' => 'Volumes Submitted'
         ];
     }
 
@@ -92,5 +94,21 @@ class Contributor extends \yii\db\ActiveRecord
 
     public function getName(){
         return $this->organization.' - '.$this->username;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVolume($month)
+    {
+        //$month = Yii::$app->request->get('date') !== null ? Yii::$app->request->get('date'): date('Y-m');
+        $month = explode('-',$month);
+        $volume = Volume::find()
+            ->where(['user_id'=>$this->id])
+            ->andWhere("MONTH(volume.date) = {$month[1]} ")
+            ->andWhere("YEAR(volume.date) = {$month[0]}")
+            ->one();
+
+        return (bool)$volume;
     }
 }

@@ -14,6 +14,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Pjax;
+use yii\bootstrap\Nav;
 
 
 /**
@@ -27,6 +28,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <?= Nav::widget([
+                'options' => ['class' => 'nav-pills'],
+                'items' => [
+                    ['label' => 'Volume', 'url' => ['/volume/index']],
+                    ['label' => 'Commodities', 'url' => ['/commodity/index']],
+                    ['label' => 'Contributors', 'url' => ['/contributor/index']],
+                    ['label' => 'Countries', 'url' => ['/country/index']],    
+                    ['label' => 'Site Users', 'url' => ['/user/admin']],
+                    ['label' => 'RFBS', 'url' => ['/rfbs/index']],
+                ],
+            ]);
+        ?>
+    </div>
+</div>
 
 <?= $this->render('/admin/_menu') ?>
 

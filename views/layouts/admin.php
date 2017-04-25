@@ -65,7 +65,7 @@ AppAsset::register($this);
                             ],
                             [
                                 'label' => 'Admin',
-                                'url' => ['/rfbs/index'],
+                                'url' => ['/volume/index'],
                                 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
                                 'linkOptions' => ['data-method' => 'post'],
                             ],
