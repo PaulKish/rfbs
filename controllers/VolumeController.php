@@ -14,6 +14,7 @@ use dektrium\user\filters\AccessRule;
 use app\models\Type;
 use app\models\Commodity;
 use app\models\Contributor;
+use app\models\Country;
 use yii\helpers\ArrayHelper;
 
 
@@ -59,19 +60,17 @@ class VolumeController extends Controller
         $searchModel = new VolumeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        //$types = ArrayHelper::map(Type::find()->all(), 'id', 'type');
+        //$commodities = ArrayHelper::map(Commodity::find()->all(), 'id', 'commodity');
+        //$countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            //'types' => $types,
+            //'commodities' => $commodities,
+            //'countries' => $countries
         ]); 
-        /*
-        $dataProvider = new ActiveDataProvider([
-            'query' => volume::find()->orderBy('id desc'),
-            'pagination' => ['pagesize'=>10]
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);*/
     }
 
     /**

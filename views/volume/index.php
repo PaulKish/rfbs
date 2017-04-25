@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr> 
 
     <div class="pull-right">
-        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize']); ?>
+        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize','sizes'=>[10=>10,20=>20,50=>50]]); ?>
     </div>
 
     <?= GridView::widget([

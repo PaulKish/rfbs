@@ -100,7 +100,7 @@ class VolumeSearch extends volume
             'product_id' => $this->product_id,
             'volume' => $this->volume,
             'type_id' => $this->type_id,
-            'date' => $this->date,
+            'volume.date' => $this->date,
             'time' => $this->time,
             'volume.active' => $this->active,
         ])
