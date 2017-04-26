@@ -47,16 +47,17 @@ class RfbsController extends \yii\web\Controller
      */ 
     public function actionIndex()
     {
-        $pagesize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize'):20;
-        $model = new FilterForm;
-        if ($model->load(Yii::$app->request->get())){
+        $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 20;
 
+        $model = new FilterForm;
+        if (!$model->load(Yii::$app->request->get())){
+            $model->date = date('Y-m');
         }
         
         $query = Contributor::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => ['pagesize'=>$pagesize]
+            'pagination' => ['pagesize'=>$psize]
         ]);
 
         return $this->render('index', [

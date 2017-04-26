@@ -27,8 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr> 
 
     <div class="pull-right">
-        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize','sizes'=>[10=>10,20=>20,50=>50]]); ?>
+        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize','sizes'=>[10=>10,20=>20,50=>50,100=>100]]); ?>
     </div>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -50,5 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    <?php Pjax::end(); ?>
 
 </div>

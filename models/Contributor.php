@@ -101,7 +101,6 @@ class Contributor extends \yii\db\ActiveRecord
      */
     public function getVolume($month)
     {
-        //$month = Yii::$app->request->get('date') !== null ? Yii::$app->request->get('date'): date('Y-m');
         $month = explode('-',$month);
         $volume = Volume::find()
             ->where(['user_id'=>$this->id])
