@@ -45,11 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
         'filterSelector' => 'select[name="pagesize"]',
+        'tableOptions' => ['id'=>'contributor_report','class'=>'table-export table table-bordered'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'organization',
-            //'role.role',
-            //'country.country',
             [
             	'label'=>'Volumes Submitted',
             	'format' => 'boolean',

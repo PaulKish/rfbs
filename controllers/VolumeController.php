@@ -51,6 +51,19 @@ class VolumeController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'delete-multiple' => [
+                'class' => 'mickgeek\actionbar\DeleteMultipleAction',
+                'modelClass' => 'app\models\Volume',
+                'afterDeleteCallback' => function ($action) {
+                    Yii::$app->getSession()->setFlash('success', 'The selected rows have been deleted successfully.');
+                },
+            ]
+        ];
+    }
+
     /**
      * Lists all volume models.
      * @return mixed
@@ -145,6 +158,38 @@ class VolumeController extends Controller
     {
         $this->findModel($id)->delete();
 
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Multiple delete
+     */
+    public function actionDeleteMultiple()
+    {
+        $ids = Yii::$app->request->post('ids');
+        foreach($ids as $id){
+            $this->findModel($id)->delete();
+        }
+    }
+
+    /**
+     * Multiple delete
+     */
+    public function actionPublish($status)
+    {
+        $ids = Yii::$app->request->post('ids');
+        foreach($ids as $id){
+            $volume = $this->findModel($id);
+            $volume->active = $status;
+            $volume->save();
+        }
+
+        $message = 'published';
+        if($status == 0){
+            $message = 'unpublished';
+        }
+
+        Yii::$app->getSession()->setFlash('success',"The selected rows have been $message successfully");
         return $this->redirect(['index']);
     }
 

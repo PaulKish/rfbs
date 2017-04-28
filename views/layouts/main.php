@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\MainAsset;
 use app\common\widgets\Alert;
+use cybercog\yii\googleanalytics\widgets\GATracking;
 
 MainAsset::register($this);
 ?>
@@ -25,6 +26,10 @@ MainAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+
+        <?= GATracking::widget([
+            'trackingId' => 'UA-98261582-1',
+        ]) ?>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -46,8 +51,13 @@ MainAsset::register($this);
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
+                    ['label' => 'Report', 'url' => ['/site/report']],
                     ['label' => 'Contributor Report', 'url' => ['/site/report']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => 'RATIN', 
+                        'url' => 'http://ratin.net',
+                        'linkOptions' => ['target' => '_blank']
+                    ],
                     ['label' => 'Account', 
                         'items'=> [
                             [

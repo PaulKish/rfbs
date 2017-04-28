@@ -23,18 +23,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="clearfix"></div>
     <hr>
 
+    <div class="pull-right">
+        <?= \nterms\pagesize\PageSize::widget(['pageSizeParam'=>'pagesize','sizes'=>[10=>10,20=>20,50=>50,100=>100]]); ?>
+    </div>
+
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
+        'filterSelector' => 'select[name="pagesize"]',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'organization',
             'role.role',
             'country.country',
             'date',
-            //'active:boolean',
-
+            'active:boolean',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

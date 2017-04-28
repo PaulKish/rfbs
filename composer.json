@@ -22,7 +22,9 @@
         "2amigos/yii2-date-picker-widget": "~1.0",
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "symfony/var-dumper": "^3.2",
-        "nterms/yii2-pagesize-widget": "*"
+        "nterms/yii2-pagesize-widget": "*",
+        "cybercog/yii2-google-analytics": "dev-master",
+        "mickgeek/yii2-actionbar": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

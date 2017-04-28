@@ -19,11 +19,15 @@ class MainAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.2.5/css/tableexport.min.css',
         'css/site.css',
     ];
     public $js = [
         'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js',
         'js/plugins.js',
+        'js/vendor/xlsx.core.min.js',
+        'js/vendor/FileSaver.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.5/js/tableexport.min.js',
         'js/main.js'
     ];
     public $depends = [

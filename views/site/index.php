@@ -212,9 +212,9 @@ $this->title = 'Regional Food Balance Sheet';
     	<div class="col-md-6">
     		<h2>Partners</h2>
     		<hr>
-
     		<?= Html::img('@web/img/eagc_logo.png'); ?>
-    		<?= Html::img('@web/img/eac_logo.png',['height'=>'150px','class'=>'pull-right']); ?>
+    		<?= Html::img('@web/img/wfp.png',['height'=>'140px']); ?>
+    		<?= Html::img('@web/img/eac_logo.png',['height'=>'140px']); ?>
     	</div>
     	<div class="col-md-6">
     		<h2>Contact</h2>
