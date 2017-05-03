@@ -51,13 +51,9 @@ MainAsset::register($this);
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Report', 'url' => ['/site/report']],
-                    ['label' => 'Contributor Report', 'url' => ['/site/report']],
+                    ['label' => 'Reports', 'url' => ['/site/report']],
+                    ['label' => 'Balance Sheet', 'url' => ['/site/report']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
-                    ['label' => 'RATIN', 
-                        'url' => 'http://ratin.net',
-                        'linkOptions' => ['target' => '_blank']
-                    ],
                     ['label' => 'Account', 
                         'items'=> [
                             [
