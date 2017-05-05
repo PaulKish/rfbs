@@ -225,17 +225,43 @@ $this->title = 'Regional Food Balance Sheet';
 		</div>
     </div>
 
-   
     <div class="row">
-    	<div class="col-md-12">
-    		<h2>Partners</h2>
-    		<hr>
-    		<?= Html::img('@web/img/eagc_logo.png'); ?>
-    		<?= Html::img('@web/img/wfp.png',['height'=>'140px']); ?>
-    		<?= Html::img('@web/img/eac_logo.png',['height'=>'140px']); ?>
-    	</div>
-    </div>
-    
+    	<div class="col-md-6">
+		    <h2>Partners</h2>
+		    <hr>
+
+		    <div id="carousel-partners" class="carousel slide" data-ride="carousel" data-interval="5000">
+			  	<!-- Wrapper for slides -->
+			  	<div class="carousel-inner" role="listbox" style="height: 140px;">
+			    	<div class="item active">
+			    		<?= Html::img('@web/img/eagc_logo.png'); ?>
+			    	</div>
+			    	<div class="item">
+			    		<?= Html::img('@web/img/wfp.png'); ?>
+			    	</div>
+			    	<div class="item">
+			    		<?= Html::img('@web/img/eac_logo.png'); ?>
+			    	</div>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h2>Contact</h2>
+			<hr>
+			
+	        <address>
+				Mbaazi Avenue, Off Kingara Road <br>
+				P.O Box 218-00606 Nairobi, Kenya <br>
+				Tel: +254 20 3745840/ 37560636/7 <br>
+				Mobile: +254 710 607 313/ +254 733 444 035 <br>
+				Fax: +254 20 3745841, Secretariat <br>
+				Email: <?= Html::mailto('rfbs@eagc.org') ?> 
+	    	</address>
+		</div>
+	</div>
+
+
+
 </div>
 <?php
 $script = <<< JS

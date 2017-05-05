@@ -79,8 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="pull-right">
         <?= \nterms\pagesize\PageSize::widget([
             'pageSizeParam'=>'pagesize',
-            'defaultPageSize'=>20,
-            'sizes'=>[10=>10, 20 => 20,50 => 50,100 => 100],
+            'defaultPageSize'=>50,
+            'sizes'=>[20 => 20,50 => 50,100 => 100],
             'template'=>'{list}',
             'options'=>['class'=>'form-control']
         ]); ?>
