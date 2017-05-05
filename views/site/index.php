@@ -5,6 +5,7 @@ use miloschuman\highcharts\Highcharts;
 use yii\web\JsExpression;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\models\Volume;
 use yii\web\View;
 
@@ -12,7 +13,7 @@ $this->title = 'Regional Food Balance Sheet';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron well">
+    <div class="jumbotron">
         <h1>Regional Food Balance Sheet</h1>
 
         <p class="lead"> by EAGC</p>
@@ -43,7 +44,7 @@ $this->title = 'Regional Food Balance Sheet';
 
     <div class="row">
     	<div class="col-md-6">
-    		<div class="panel panel-default">
+    		<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Supply/Utilization (MT)</h3>
 			  	</div>
@@ -64,6 +65,7 @@ $this->title = 'Regional Food Balance Sheet';
 								   'options' => [
 								   		'chart' => [
 									        'type' =>'pie',
+									       	'height' => 290,
 									       	'width' => 500 
 									    ],
 								      	'title' => false,
@@ -72,7 +74,7 @@ $this->title = 'Regional Food Balance Sheet';
 									            'allowPointSelect' => true,
 									            'cursor' => 'pointer',
 									            'dataLabels' => [
-								                    'enabled' => true
+								                    'enabled' => false
 								                ],
 								                'showInLegend'=>true
 									        ]
@@ -102,10 +104,13 @@ $this->title = 'Regional Food Balance Sheet';
 						<?php endforeach; ?>
 					</div>
 			  	</div>
+			  	<div class="panel-footer">
+			  		<?= Html::a('See more',Url::to(['site/surplus-deficit-report'])) ?>
+			  	</div>
 			</div>
     	</div>
     	<div class="col-md-6">
-    		<div class="panel panel-default">
+    		<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Surplus/Deficit (MT)</h3>
 			  	</div>
@@ -113,26 +118,29 @@ $this->title = 'Regional Food Balance Sheet';
 			    	<table class="table table-bordered">
 			    		<thead>
 			    			<th>Commodity</th>
-			    			<th>Stock Available</th>
-			    			<th>Utilization</th>
-			    			<th>Surplus/Deficit</th>
+			    			<th class="text-right">Stock Available</th>
+			    			<th class="text-right">Utilization</th>
+			    			<th class="text-right">Surplus/Deficit</th>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
 			    			<tr>
 			    				<?php 
-			    					$supply = Volume::catVolume(2,$key,$model->date,$model->country);
-			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->country);
-			    					$suplus = ($supply - $utilization);
+			    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
+			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
+			    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
 			    				?>
 			    				<td><?= $value ?></td>
-			    				<td><?= $supply ?></td>
-			    				<td><?= $utilization ?></td>
-			    				<td><?= $suplus ?></td>
+			    				<td class="text-right"><?= $supply ?></td>
+			    				<td class="text-right"><?= $utilization ?></td>
+			    				<td class="text-right"><strong><?= $surplus ?></strong></td>
 			    			</tr>
 			    			<?php endforeach; ?>
 			    		</tbody>
 			    	</table>
+			  	</div>
+			  	<div class="panel-footer">
+			  		<?= Html::a('See more',Url::to(['site/surplus-deficit-report'])) ?>
 			  	</div>
 			</div>
     	</div>
@@ -140,7 +148,7 @@ $this->title = 'Regional Food Balance Sheet';
 
     <div class="row">
     	<div class="col-md-6">
-    		<div class="panel panel-default">
+    		<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Tradeable Stock (MT)</h3>
 			  	</div>
@@ -148,35 +156,38 @@ $this->title = 'Regional Food Balance Sheet';
 			  		<table class="table table-bordered">
 			    		<thead>
 			    			<th>Commodity</th>
-			    			<th>Government</th>
-			    			<th>Warehouse</th>
-			    			<th>Processors</th>
-			    			<th>Total</th>
+			    			<th class="text-right">Government</th>
+			    			<th class="text-right">Warehouse</th>
+			    			<th class="text-right">Processors</th>
+			    			<th class="text-right">Total</th>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
 			    			<?php 
-		    					$commercial = Volume::typeVolume(2,$key,$model->date,$model->country);
-		    					$processors = Volume::typeVolume(4,$key,$model->date,$model->country);
-								$warehouses = Volume::typeVolume(5,$key,$model->date,$model->country);
-								$total = $commercial + $processors + $warehouses;
+		    					$commercial = Volume::typeVolume(2,$key,$model->date,$model->end_date,$model->country);
+		    					$processors = Volume::typeVolume(4,$key,$model->date,$model->end_date,$model->country);
+								$warehouses = Volume::typeVolume(5,$key,$model->date,$model->end_date,$model->country);
+								$total = \Yii::$app->formatter->asDecimal($commercial + $processors + $warehouses,2);
 		    				?>
 			    			<tr>
 			    				
 			    				<td><?= $value ?></td>
-			    				<td><?= $commercial ?></td>
-			    				<td><?= $warehouses ?></td>
-			    				<td><?= $processors ?></td>
-			    				<td><?= $total ?></td>
+			    				<td class="text-right"><?= $commercial ?></td>
+			    				<td class="text-right"><?= $warehouses ?></td>
+			    				<td class="text-right"><?= $processors ?></td>
+			    				<td class="text-right"><strong><?= $total ?></strong></td>
 			    			</tr>
 			    			<?php endforeach; ?>
 			    		</tbody>
 			    	</table>
 			  	</div>
+			  	<div class="panel-footer">
+			  		<?= Html::a('See more',Url::to(['site/tradeable-stock-report'])) ?>
+			  	</div>
 			</div>
 		</div>
 		<div class="col-md-6">
-    		<div class="panel panel-default">
+    		<div class="panel panel-primary">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Production Estimates (MT)</h3>
 			  	</div>
@@ -184,24 +195,27 @@ $this->title = 'Regional Food Balance Sheet';
 			  		<table class="table table-bordered">
 			    		<thead>
 			    			<th>Commodity</th>
-			    			<th>Production Estimate</th>
-			    			<th>Post-harvest Loss</th>
+			    			<th class="text-right">Production Estimate</th>
+			    			<th class="text-right">Post-harvest Loss</th>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
 			    			<?php 
-		    					$production = Volume::typeVolume(10,$key,$model->date,$model->country);
-		    					$loss = Volume::typeVolume(11,$key,$model->date,$model->country);
+		    					$production = Volume::typeVolume(10,$key,$model->date,$model->end_date,$model->country);
+		    					$loss = Volume::typeVolume(11,$key,$model->date,$model->end_date,$model->country);
 		    				?>
 			    			<tr>
 			    				
 			    				<td><?= $value ?></td>
-			    				<td><?= $production ?></td>
-			    				<td><?= $loss ?></td>
+			    				<td class="text-right"><?= $production ?></td>
+			    				<td class="text-right"><?= $loss ?></td>
 			    			</tr>
 			    			<?php endforeach; ?>
 			    		</tbody>
 			    	</table>
+			  	</div>
+			  	<div class="panel-footer">
+			  		<?= Html::a('See more',Url::to(['site/production-estimate-report'])) ?>
 			  	</div>
 			</div>
 		</div>

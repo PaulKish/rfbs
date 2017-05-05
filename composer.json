@@ -24,7 +24,8 @@
         "symfony/var-dumper": "^3.2",
         "nterms/yii2-pagesize-widget": "*",
         "cybercog/yii2-google-analytics": "dev-master",
-        "mickgeek/yii2-actionbar": "*"
+        "mickgeek/yii2-actionbar": "*",
+        "kartik-v/yii2-export": "^1.2@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -50,14 +50,12 @@ class SiteController extends Controller
 
     /**
      * Displays homepage.
-     *
-     * @return string
      */
     public function actionIndex()
     {
         $model = new FilterForm;
 
-        $date = date('Y-m');
+        $date = date('Y-m',strtotime("-1 month"));
         $model->date = $date;
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
@@ -77,8 +75,6 @@ class SiteController extends Controller
 
     /**
      * Displays about.
-     *
-     * @return string
      */
     public function actionAbout()
     {
@@ -88,8 +84,6 @@ class SiteController extends Controller
 
     /**
      * Displays contact.
-     *
-     * @return string
      */
     public function actionContact()
     {
@@ -97,11 +91,9 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays report.
-     *
-     * @return string
+     * Displays balance sheet.
      */
-    public function actionReport()
+    public function actionBalanceSheet()
     {
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
@@ -111,15 +103,87 @@ class SiteController extends Controller
         $countries = [ 0 => 'Regional'] + $countries;
 
         if (!$model->load(Yii::$app->request->post())){
-            $model->date = date('Y-m-01');
-            $model->end_date = date('Y-m-t');
+            $model->date = date('Y-m-01',strtotime("-1 month"));
+            $model->end_date = date('Y-m-t',strtotime("-1 month"));
             $model->commodity = 1;
         }
 
-        return $this->render('report',[
+        return $this->render('balance_sheet',[
             'countries' => $countries,
             'commodities'=>$commodities,
             'model' => $model
         ]);
     }
+
+    /**
+     * Displays surplus deficit report.
+     */ 
+    public function actionSurplusDeficitReport(){
+        $model = new FilterForm;
+
+        $model->date = date('Y-m-01',strtotime("-1 month"));
+        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+
+        $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
+        $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
+    
+        if (!$model->load(Yii::$app->request->get())){
+            $model->commodity = 1;
+            $model->country = 0;
+        }
+
+        return $this->render('surplus_deficit',[
+            'model'=>$model,
+            'countries'=>$countries,
+            'commodities'=>$commodities
+        ]);
+    }
+
+    /**
+     * Tradeable stock report.
+     */ 
+    public function actionTradeableStockReport(){
+        $model = new FilterForm;
+
+        $model->date = date('Y-m-01',strtotime("-1 month"));
+        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+
+        $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
+        $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
+    
+        if (!$model->load(Yii::$app->request->get())){
+            $model->commodity = 1;
+            $model->country = 0;
+        }
+
+        return $this->render('tradeable_stock',[
+            'model'=>$model,
+            'countries'=>$countries,
+            'commodities'=>$commodities
+        ]);
+    }
+
+    /**
+     * Production estimate report.
+     */
+    public function actionProductionEstimateReport(){
+        $model = new FilterForm;
+
+        $model->date = date('Y-m-01',strtotime("-1 month"));
+        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+
+        $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
+        $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
+    
+        if (!$model->load(Yii::$app->request->get())){
+            $model->commodity = 1;
+            $model->country = 0;
+        }
+
+        return $this->render('production_estimate',[
+            'model'=>$model,
+            'countries'=>$countries,
+            'commodities'=>$commodities
+        ]);
+    } 
 }

@@ -51,8 +51,23 @@ MainAsset::register($this);
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Reports', 'url' => ['/site/report']],
-                    ['label' => 'Balance Sheet', 'url' => ['/site/report']],
+                    ['label' => 'Reports', 
+                        'items'=> [
+                            [
+                                'label' => 'Surplus/Deficit Report',
+                                'url' => ['/site/surplus-deficit-report'],
+                            ],
+                            [
+                                'label' => 'Tradeable Stock Report',
+                                'url' => ['/site/tradeable-stock-report'],
+                            ],
+                            [
+                                'label' => 'Production Estimate Report',
+                                'url' => ['/site/production-estimate-report'],
+                            ],
+                        ]
+                    ],
+                    ['label' => 'Balance Sheet', 'url' => ['/site/balance-sheet']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     ['label' => 'Account', 
                         'items'=> [
@@ -102,7 +117,9 @@ MainAsset::register($this);
                     | For any issues please write to <?= Html::mailto('rfbs@eagc.org') ?>
                 </p>
 
-                <p class="pull-right"><?= Yii::powered() ?></p>
+                <p class="pull-right">
+                    <?= Html::a('EAGC','http://eagc.org') ?> | <?= Html::a('RATIN','http://ratin.net') ?>
+                </p>
             </div>
         </footer>
 

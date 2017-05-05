@@ -4,8 +4,8 @@ use yii\helpers\Html;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
-	<div class="jumbotron well">
+<div class="site-contact">
+	<div class="jumbotron">
         <h2>Contact</h2>
         <address>
 			Mbaazi Avenue, Off Kingara Road <br>

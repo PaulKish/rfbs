@@ -88,7 +88,7 @@ class Volume extends \yii\db\ActiveRecord
         return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
 
-    public static function typeVolume($type,$product,$date=NULL,$country=NULL,$end_date = NULL){
+    public static function typeVolume($type,$product,$date=NULL,$end_date = NULL,$country=NULL){
         if($date == NULL){
             $date = date('Y-m-01');
         }
@@ -102,8 +102,6 @@ class Volume extends \yii\db\ActiveRecord
             $country = NULL;
         }
 
-        $formatter = \Yii::$app->formatter;
-
         $volume = Volume::find()
             ->where(['type_id'=>$type])
             ->andWhere(['product_id'=>$product])
@@ -116,15 +114,20 @@ class Volume extends \yii\db\ActiveRecord
         if($volume == NULL)
             $volume = 0;
 
+        $formatter = \Yii::$app->formatter;
         return $formatter->asDecimal($volume,2);
     }
 
     /**
      * Category volume
      */ 
-    public static function catVolume($category,$product,$date=NULL,$country=NULL,$end_date=NULL){
+    public static function catVolume($category,$product,$date=NULL,$end_date=NULL,$country=NULL){
         if($date == NULL){
             $date = date('Y-m');
+        }
+
+        if($end_date == NULL){
+            $end_date = date('Y-m-t'); // this will fail after 2038
         }
 
         // this is to accomodate adding a regional country with id 0 
@@ -132,14 +135,9 @@ class Volume extends \yii\db\ActiveRecord
             $country = NULL;
         }
 
-        $date = explode('-',$date);
-
-        $formatter = \Yii::$app->formatter;
-
         $volume = Volume::find()
             ->where(['product_id'=>$product])
-            ->andWhere("MONTH(volume.date) = {$date[1]} ")
-            ->andWhere("YEAR(volume.date) = {$date[0]}")
+            ->andWhere(['between','volume.date',$date,$end_date])
             ->joinWith(
                 ['user' => function ($q) use ($country) {
                     $q->andFilterWhere(['=', 'contributor.country_id',$country]);
@@ -152,6 +150,7 @@ class Volume extends \yii\db\ActiveRecord
         if($volume == NULL)
             $volume = 0;
 
+        $formatter = \Yii::$app->formatter;
         return $formatter->asDecimal($volume,2);
     }
 }
