@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use app\models\Volume;
 use yii\web\View;
 use dosamigos\datepicker\DateRangePicker;
+use miloschuman\highcharts\Highcharts;
 
 $this->title = 'Production Estimate Report';
 $this->params['breadcrumbs'][] = $this->title;
@@ -43,11 +44,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				    <hr>
 
-				    <table id="production-estimate-report-<?= $model->date ?>-<?= $model->end_date ?>" class="table table-bordered table-export">
+				    <?= Highcharts::widget([
+				    	'scripts' => [
+					        'modules/data',
+					    ],
+					   	'options' => [
+					   		'data' => [
+						        'table' => 'production-estimate-report-'.$model->date.'-'.$model->end_date
+						    ],
+					   		'chart' => [
+						        'type' =>'column',
+						       	'height' => 290,
+						    ],
+					      	'title' => ['text'=>'Production Estimate Report'],
+					      	'yAxis' => [
+						      	'title' => [
+						         	'text' => 'Volume (MT)'
+						      	]
+						   	],
+					      	'credits'=> false
+					   	]
+					]); ?>
+
+				    <table id="production-estimate-report-<?= $model->date ?>-<?= $model->end_date ?>" class="table table-bordered">
 			    		<thead>
-			    			<th>Commodity</th>
-			    			<th class="text-right">Production Estimate</th>
-			    			<th class="text-right">Post-harvest Loss</th>
+			    			<tr>
+				    			<th>Commodity</th>
+				    			<th class="text-right">Production Estimate</th>
+				    			<th class="text-right">Post-harvest Loss</th>
+			    			</tr>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
@@ -57,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    				?>
 			    			<tr>
 			    				
-			    				<td><?= $value ?></td>
+			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $production ?></td>
 			    				<td class="text-right"><?= $loss ?></td>
 			    			</tr>

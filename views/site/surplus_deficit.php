@@ -45,97 +45,55 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				    <hr>
 
-			  		<div class="row">
-    					<div class="col-md-6">
-					  		<!-- Nav tabs -->
-							<ul id="commodities" class="nav nav-pills" role="tablist">
-							    <?php foreach($commodities as $key => $value): ?>
-							    <li role="presentation">
-							    	<a href="#<?= $value; ?>" aria-controls="<?= $key; ?>" role="tab" data-toggle="tab"><?= $value; ?></a>
-							    </li>
-							    <?php endforeach; ?>
-							</ul>
+				    <?= Highcharts::widget([
+				    	'scripts' => [
+					        'modules/data',
+					    ],
+					   	'options' => [
+					   		'data' => [
+						        'table' => 'surplus-deficit-report-'.$model->date.'-'.$model->end_date
+						    ],
+					   		'chart' => [
+						        'type' =>'column',
+						       	'height' => 290,
+						    ],
+					      	'title' => ['text'=>'Surplus Deficit Report'],
+					      	'yAxis' => [
+						      	'title' => [
+						         	'text' => 'Volume (MT)'
+						      	]
+						   	],
+					      	'credits'=> false
+					   	]
+					]); ?>
 
-							<div class="tab-content">
-						  		<?php foreach($commodities as $key => $value): ?>
-							    	<div role="tabpanel" class="tab-pane" id="<?= $value; ?>">
-							    		<?= Highcharts::widget([
-										   'options' => [
-										   		'chart' => [
-											        'type' =>'pie',
-											       	'height' => 290,
-									       			'width' => 500 
-											    ],
-										      	'title' => false,
-										      	'plotOptions' => [
-											        'pie' => [
-											            'allowPointSelect' => true,
-											            'cursor' => 'pointer',
-											            'dataLabels' => [
-										                    'enabled' => false
-										                ],
-										                'showInLegend'=>true
-											        ]
-											    ],
-											    'tooltip' => [
-										            'pointFormat' => '{series.name}: <b>{point.y} MT</b>'
-										        ],
-										      	'series' => [
-											        [
-										                'name' => 'Volume',
-										                'data' => [
-										                	[
-													            'name' => 'Supply',
-													            'y' => (float) Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country) // 2 is supply
-													        ],
-													        [
-													            'name' => 'Utilization',
-													            'y' => (float) Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country) // 1 is utilization
-													        ]
-													    ]
-										            ],
-										      	],
-										      	'credits'=> false
-										   	]
-										]); ?>
-							    	</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
-
-						<div class="col-md-6">
-							<table id="surplus-deficit-report-<?= $model->date ?>-<?= $model->end_date ?>" class="table table-bordered table-export">
-					    		<thead>
-					    			<th>Commodity</th>
-					    			<th class="text-right">Stock Available</th>
-					    			<th class="text-right">Utilization</th>
-					    			<th class="text-right">Surplus/Deficit</th>
-					    		</thead>
-					    		<tbody>
-					    			<?php foreach($commodities as $key => $value): ?>
-					    			<tr>
-					    				<?php 
-					    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
-					    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
-					    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
-					    				?>
-					    				<td><?= $value ?></td>
-					    				<td class="text-right"><?= $supply ?></td>
-					    				<td class="text-right"><?= $utilization ?></td>
-					    				<td class="text-right"><strong><?= $surplus ?></strong></td>
-					    			</tr>
-					    			<?php endforeach; ?>
-					    		</tbody>
-					    	</table>
-					    </div>
-					</div>
+			  		<table id="surplus-deficit-report-<?= $model->date ?>-<?= $model->end_date ?>" class="table table-bordered table-export">
+			    		<thead>
+			    			<tr>
+				    			<th>Commodity</th>
+				    			<th class="text-right">Stock Available</th>
+				    			<th class="text-right">Utilization</th>
+				    			<th class="text-right">Surplus/Deficit</th>
+			    			</tr>
+			    		</thead>
+			    		<tbody>
+			    			<?php foreach($commodities as $key => $value): ?>
+			    			<tr>
+			    				<?php 
+			    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
+			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
+			    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
+			    				?>
+			    				<th><?= $value ?></th>
+			    				<td class="text-right"><?= $supply ?></td>
+			    				<td class="text-right"><?= $utilization ?></td>
+			    				<td class="text-right"><?= $surplus ?></td>
+			    			</tr>
+			    			<?php endforeach; ?>
+			    		</tbody>
+			    	</table>
 			  	</div>
 			</div>
     	</div>
     </div>
 </div>
-<?php
-$script = <<< JS
-    $('#commodities a:first').tab('show');
-JS;
-$this->registerJs($script,View::POS_END);

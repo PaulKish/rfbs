@@ -93,8 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 							<table id="balance_sheet" class="table table-bordered table-stripped table-export">
 								<thead>
-									<th>Component</th>
-									<th class="text-right">Volume (MT)</th>
+									<tr>
+										<th>Component</th>
+										<th class="text-right">Volume (MT)</th>
+									</tr>
 								</thead>
 
 								<tbody>

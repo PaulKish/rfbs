@@ -18,7 +18,7 @@ $this->title = 'Regional Food Balance Sheet';
 
         <p class="lead"> by EAGC</p>
 
-        <p>This website allows the East African Community to access information about the staple foods produced and traded in the East African Community partner nations to enable and facilitate trade. </p>
+        <p>This Website allows grain stakeholders to access information on staple foods supply and utilization in the region for policy advisory, trade linkage information based on food supply and food security</p>
 
         <p><a class="btn btn-lg btn-success" href="#">Get started</a></p>
     </div>
@@ -117,10 +117,12 @@ $this->title = 'Regional Food Balance Sheet';
 			  	<div class="panel-body">
 			    	<table class="table table-bordered">
 			    		<thead>
-			    			<th>Commodity</th>
-			    			<th class="text-right">Stock Available</th>
-			    			<th class="text-right">Utilization</th>
-			    			<th class="text-right">Surplus/Deficit</th>
+			    			<tr>
+				    			<th>Commodity</th>
+				    			<th class="text-right">Stock Available</th>
+				    			<th class="text-right">Utilization</th>
+				    			<th class="text-right">Surplus/Deficit</th>
+			    			</tr>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
@@ -130,10 +132,10 @@ $this->title = 'Regional Food Balance Sheet';
 			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
 			    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
 			    				?>
-			    				<td><?= $value ?></td>
+			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $supply ?></td>
 			    				<td class="text-right"><?= $utilization ?></td>
-			    				<td class="text-right"><strong><?= $surplus ?></strong></td>
+			    				<td class="text-right"><?= $surplus ?></td>
 			    			</tr>
 			    			<?php endforeach; ?>
 			    		</tbody>
@@ -155,11 +157,13 @@ $this->title = 'Regional Food Balance Sheet';
 			  	<div class="panel-body">
 			  		<table class="table table-bordered">
 			    		<thead>
-			    			<th>Commodity</th>
-			    			<th class="text-right">Government</th>
-			    			<th class="text-right">Warehouse</th>
-			    			<th class="text-right">Processors</th>
-			    			<th class="text-right">Total</th>
+			    			<tr>
+				    			<th>Commodity</th>
+				    			<th class="text-right">Government</th>
+				    			<th class="text-right">Warehouse</th>
+				    			<th class="text-right">Processors</th>
+				    			<th class="text-right">Total</th>
+			    			</tr>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
@@ -170,12 +174,11 @@ $this->title = 'Regional Food Balance Sheet';
 								$total = \Yii::$app->formatter->asDecimal($commercial + $processors + $warehouses,2);
 		    				?>
 			    			<tr>
-			    				
-			    				<td><?= $value ?></td>
+			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $commercial ?></td>
 			    				<td class="text-right"><?= $warehouses ?></td>
 			    				<td class="text-right"><?= $processors ?></td>
-			    				<td class="text-right"><strong><?= $total ?></strong></td>
+			    				<td class="text-right"><?= $total ?></td>
 			    			</tr>
 			    			<?php endforeach; ?>
 			    		</tbody>
@@ -194,9 +197,11 @@ $this->title = 'Regional Food Balance Sheet';
 			  	<div class="panel-body">
 			  		<table class="table table-bordered">
 			    		<thead>
-			    			<th>Commodity</th>
-			    			<th class="text-right">Production Estimate</th>
-			    			<th class="text-right">Post-harvest Loss</th>
+			    			<tr>
+				    			<th>Commodity</th>
+				    			<th class="text-right">Production Estimate</th>
+				    			<th class="text-right">Post-harvest Loss</th>
+			    			</tr>
 			    		</thead>
 			    		<tbody>
 			    			<?php foreach($commodities as $key => $value): ?>
@@ -205,8 +210,7 @@ $this->title = 'Regional Food Balance Sheet';
 		    					$loss = Volume::typeVolume(11,$key,$model->date,$model->end_date,$model->country);
 		    				?>
 			    			<tr>
-			    				
-			    				<td><?= $value ?></td>
+			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $production ?></td>
 			    				<td class="text-right"><?= $loss ?></td>
 			    			</tr>
@@ -223,27 +227,15 @@ $this->title = 'Regional Food Balance Sheet';
 
    
     <div class="row">
-    	<div class="col-md-6">
+    	<div class="col-md-12">
     		<h2>Partners</h2>
     		<hr>
     		<?= Html::img('@web/img/eagc_logo.png'); ?>
     		<?= Html::img('@web/img/wfp.png',['height'=>'140px']); ?>
     		<?= Html::img('@web/img/eac_logo.png',['height'=>'140px']); ?>
     	</div>
-    	<div class="col-md-6">
-    		<h2>Contact</h2>
-    		<hr>
-
-    		<address>
-    			Mbaazi Avenue, Off Kingara Road <br>
-				P.O Box 218-00606 Nairobi, Kenya <br>
-				Tel: +254 20 3745840/ 37560636/7 <br>
-				Mobile: +254 710 607 313/ +254 733 444 035 <br>
-				Fax: +254 20 3745841, Secretariat <br>
-				Email: <?= Html::mailto('rfbs@eagc.org') ?> 
-	    	</address>
-    	</div>
     </div>
+    
 </div>
 <?php
 $script = <<< JS
