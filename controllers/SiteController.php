@@ -29,7 +29,7 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['report'],
+                        'actions' => ['balance-sheet','surplus-deficit-report','tradeable-stock-report','production-estimate-report'],
                         'roles' => ['@'],
                     ],
                 ],

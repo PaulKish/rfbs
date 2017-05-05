@@ -36,8 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				            'autoclose' => true,
 				            'format' => 'yyyy-mm-dd',
 				            'endDate' => '+0d'
-				            //'startView' => 'months', 
-				            //'minViewMode' => 'months',
 				        ]
 				    ]) ?>
 					
@@ -119,12 +117,12 @@ $this->params['breadcrumbs'][] = $this->title;
 					    				<?php 
 					    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
 					    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
-					    					$suplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
+					    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
 					    				?>
 					    				<td><?= $value ?></td>
 					    				<td class="text-right"><?= $supply ?></td>
 					    				<td class="text-right"><?= $utilization ?></td>
-					    				<td class="text-right"><strong><?= $suplus ?></strong></td>
+					    				<td class="text-right"><strong><?= $surplus ?></strong></td>
 					    			</tr>
 					    			<?php endforeach; ?>
 					    		</tbody>
