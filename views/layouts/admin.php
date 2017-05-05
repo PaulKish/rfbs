@@ -35,7 +35,7 @@ AppAsset::register($this);
 		<div class="wrap">
 		    <?php
 		    NavBar::begin([
-		        'brandLabel' => Yii::$app->name,
+		        'brandLabel' => Yii::$app->name.' | Administration',
 		        'brandUrl' => Yii::$app->homeUrl,
 		        'options' => [
 		            'class' => 'navbar-default navbar-fixed-top',
@@ -45,7 +45,8 @@ AppAsset::register($this);
 		        'options' => ['class' => 'navbar-nav navbar-right'],
 		        'items' => [
 		        	['label' => 'Dashboard', 
-		            	'url' => ['/rfbs/index'],
+		            	'url' => ['/volume/index'],
+		            	'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin,
 		            ],
 		            ['label' => 'Main Site', 
 		            	'url' => ['/site/index'],

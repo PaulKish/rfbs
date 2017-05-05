@@ -232,7 +232,7 @@ $this->title = 'Regional Food Balance Sheet';
 
 		    <div id="carousel-partners" class="carousel slide" data-ride="carousel" data-interval="5000">
 			  	<!-- Wrapper for slides -->
-			  	<div class="carousel-inner" role="listbox" style="height: 140px;">
+			  	<div class="carousel-inner" role="listbox">
 			    	<div class="item active">
 			    		<?= Html::img('@web/img/eagc_logo.png'); ?>
 			    	</div>
@@ -248,7 +248,7 @@ $this->title = 'Regional Food Balance Sheet';
 		<div class="col-md-6">
 			<h2>Contact</h2>
 			<hr>
-			
+
 	        <address>
 				Mbaazi Avenue, Off Kingara Road <br>
 				P.O Box 218-00606 Nairobi, Kenya <br>
@@ -259,8 +259,6 @@ $this->title = 'Regional Food Balance Sheet';
 	    	</address>
 		</div>
 	</div>
-
-
 
 </div>
 <?php

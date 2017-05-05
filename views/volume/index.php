@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= \nterms\pagesize\PageSize::widget([
             'pageSizeParam'=>'pagesize',
             'defaultPageSize'=>50,
-            'sizes'=>[20 => 20,50 => 50,100 => 100],
+            'sizes'=>[20 => 20,50 => 50,100 => 100,200 => 200],
             'template'=>'{list}',
             'options'=>['class'=>'form-control']
         ]); ?>
@@ -93,6 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterSelector' => 'select[name="pagesize"]',
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
+        'tableOptions' => ['id'=>'volume','class'=>'table-export table table-bordered'],
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
             ['class' => 'yii\grid\SerialColumn'],

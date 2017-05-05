@@ -5,8 +5,9 @@
         'options' => ['class' => 'nav-pills'],
         'items' => [
         	['label' => 'Volume', 'url' => ['/volume/index']],
+        	['label' => 'Data Grid', 'url' => ['/rfbs/grid']],
         	['label' => 'Contributions', 'url' => ['/rfbs/grid-update']],
-            ['label' => 'Data Grid', 'url' => ['/rfbs/grid']],
+            ['label' => 'Contributor Report', 'url' => ['/rfbs/index']],
         ],
     ]);
 ?>

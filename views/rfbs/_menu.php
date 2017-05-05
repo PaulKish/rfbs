@@ -4,7 +4,6 @@
 <?= Nav::widget([
         'options' => ['class' => 'nav-pills'],
         'items' => [
-        	['label' => 'RFBS', 'url' => ['/rfbs/index']],
             ['label' => 'Assignment', 'url' => ['/assignment/index']],
 			['label' => 'Category', 'url' => ['/category/index']],
 			['label' => 'Role', 'url' => ['/role/index']],

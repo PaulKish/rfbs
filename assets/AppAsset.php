@@ -18,9 +18,9 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bootstrap.min.css',
+        'css/bootstrap-simplex.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.2.5/css/tableexport.min.css',
-        'css/site.css',
+        //'css/site.css',
     ];
     public $js = [
         'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js',
