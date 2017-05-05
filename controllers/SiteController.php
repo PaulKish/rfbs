@@ -25,7 +25,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['report'],
+                'only'  => ['balance-sheet','surplus-deficit-report','tradeable-stock-report','production-estimate-report'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -33,6 +33,10 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
+                'denyCallback'  => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue or sign up to get access');
+                    Yii::$app->user->loginRequired();
+                }
             ],
         ];
     }
