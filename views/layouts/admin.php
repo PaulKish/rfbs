@@ -100,7 +100,7 @@ AppAsset::register($this);
 						            ['label' => 'Contributors', 'url' => ['/contributor/index']],
 						            ['label' => 'Countries', 'url' => ['/country/index']],	  
 						            ['label' => 'Site Users', 'url' => ['/user/admin']],
-						            ['label' => 'RFBS Settings', 'url' => ['/rfbs/index']],
+						            ['label' => 'RFBS Settings', 'url' => ['/assignment/index']],
 						        ],
 						    ]);
 						?>

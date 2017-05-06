@@ -59,7 +59,7 @@ class VolumeSearch extends volume
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => isset($params['pagesize']) ? $params['pagesize']:20,
+                'pageSize' => isset($params['pagesize']) ? $params['pagesize']:50,
             ],
         ]);
 

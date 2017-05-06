@@ -53,9 +53,10 @@ class AssignmentController extends Controller
      */
     public function actionIndex()
     {
+        $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 50;
         $dataProvider = new ActiveDataProvider([
             'query' => assignment::find(),
-            'pagination' => ['pagesize'=>10]
+            'pagination' => ['pagesize'=>$psize]
         ]);
 
         return $this->render('index', [

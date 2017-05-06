@@ -11,16 +11,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="country-index">
 
-    <div class="pull-right">
-        <?= Html::a('Create Country', ['create'], ['class' => 'btn btn-success']) ?>
-    </div>
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(); ?>
 
     <div class="clearfix"></div>
     <hr>
+
+    <div class="pull-left">
+        <?= Html::a('Create Country', ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
 
     <div class="pull-right">
         <?= \nterms\pagesize\PageSize::widget([
@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
+        'filterSelector' => 'select[name="pagesize"]',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

@@ -53,7 +53,7 @@ class ContributorController extends Controller
      */
     public function actionIndex()
     {
-        $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 20;
+        $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 50;
         $dataProvider = new ActiveDataProvider([
             'query' => contributor::find(),
             'pagination' => ['pagesize'=>$psize]

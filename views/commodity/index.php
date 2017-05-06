@@ -11,17 +11,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="commodity-index">
 
-
-    <div class="pull-right">
-        <?= Html::a('Create Commodity', ['create'], ['class' => 'btn btn-success']) ?>
-    </div>
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(); ?>
 
     <div class="clearfix"></div>
     <hr>
+
+    <div class="pull-left">
+        <?= Html::a('Create Commodity', ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
 
     <div class="pull-right">
         <?= \nterms\pagesize\PageSize::widget([
