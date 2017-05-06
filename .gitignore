@@ -34,3 +34,5 @@ codeception.yml
 
 web/index-test.php
 web/index.php
+
+web/upload/*
