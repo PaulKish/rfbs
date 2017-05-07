@@ -27,13 +27,42 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['balance-sheet','surplus-deficit-report','tradeable-stock-report','production-estimate-report'],
+                'only'  => [
+                    'balance-sheet',
+                    'surplus-deficit-report',
+                    'tradeable-stock-report',
+                    'production-estimate-report'
+                ],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['balance-sheet','surplus-deficit-report','tradeable-stock-report','production-estimate-report'],
+                        'actions' => [
+                            'surplus-deficit-report',
+                            'tradeable-stock-report',
+                            'production-estimate-report'
+                        ],
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => false,
+                        'actions' => ['balance-sheet'],
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->role != 'Contributor';
+                        },
+                        'denyCallback'  => function ($rule, $action) {
+                            Yii::$app->session->setFlash('error', 'This section is only for contributors');
+                            return $this->goHome();
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['balance-sheet'],
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->role == 'Contributor';
+                        },
+                    ]
                 ],
                 'denyCallback'  => function ($rule, $action) {
                     Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue or sign up to get access');

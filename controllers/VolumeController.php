@@ -73,8 +73,6 @@ class VolumeController extends Controller
         $searchModel = new VolumeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        //dump(Yii::$app->user->identity->role);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
