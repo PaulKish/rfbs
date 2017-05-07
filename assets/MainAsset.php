@@ -28,6 +28,7 @@ class MainAsset extends AssetBundle
         'js/vendor/xlsx.core.min.js',
         'js/vendor/FileSaver.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.5/js/tableexport.min.js',
+        'https://use.fontawesome.com/407cfa70c8.js',
         'js/main.js'
     ];
     public $depends = [

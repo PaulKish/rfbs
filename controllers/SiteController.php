@@ -11,8 +11,10 @@ use app\models\Commodity;
 use app\models\FilterForm;
 use app\models\Volume;
 use app\models\Type;
+use app\models\Report;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
@@ -190,4 +192,18 @@ class SiteController extends Controller
             'commodities'=>$commodities
         ]);
     } 
+
+    /**
+     * Resources
+     */ 
+    public function actionResources(){
+        $dataProvider = new ActiveDataProvider([
+            'query' => Report::find()->orderBy('id desc'),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('resources',['dataProvider'=>$dataProvider]);
+    }
 }

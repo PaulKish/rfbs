@@ -17,7 +17,9 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'upload')->fileInput() ?>
 
+    <?php if(!$model->isNewRecord): ?>
     <?= Html::a('View Upload',Url::to($model->getUploadUrl('upload')),['class'=>'btn btn-default']) ?>
+	<?php endif; ?>
 
     <br>
     <br>

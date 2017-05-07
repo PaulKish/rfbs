@@ -52,7 +52,7 @@ class ReportController extends Controller
     {
         $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 50;
         $dataProvider = new ActiveDataProvider([
-            'query' => Report::find(),
+            'query' => Report::find()->orderBy('id desc'),
             'pagination' => ['pagesize'=>$psize]
         ]);
 
