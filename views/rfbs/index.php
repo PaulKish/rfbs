@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'organization',
+            'date:datetime',
             [
             	'label'=>'Volumes Submitted',
             	'format' => 'boolean',

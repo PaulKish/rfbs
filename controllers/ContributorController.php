@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Contributor;
+use app\models\ContributorSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -53,13 +54,11 @@ class ContributorController extends Controller
      */
     public function actionIndex()
     {
-        $psize = Yii::$app->request->get('pagesize') !== null ? Yii::$app->request->get('pagesize') : 50;
-        $dataProvider = new ActiveDataProvider([
-            'query' => contributor::find(),
-            'pagination' => ['pagesize'=>$psize]
-        ]);
+        $searchModel = new ContributorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
