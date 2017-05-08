@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    					$commercial = Volume::typeVolume(2,$key,$model->date,$model->end_date,$model->country);
 		    					$processors = Volume::typeVolume(4,$key,$model->date,$model->end_date,$model->country);
 								$warehouses = Volume::typeVolume(5,$key,$model->date,$model->end_date,$model->country);
-								$total = \Yii::$app->formatter->asDecimal($commercial + $processors + $warehouses,2);
+								$total = (int)($commercial + $processors + $warehouses);
 		    				?>
 			    			<tr>	
 			    				<th><?= $value ?></th>

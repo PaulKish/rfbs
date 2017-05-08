@@ -114,8 +114,7 @@ class Volume extends \yii\db\ActiveRecord
         if($volume == NULL)
             $volume = 0;
 
-        $formatter = \Yii::$app->formatter;
-        return $formatter->asDecimal($volume,2);
+        return (int) $volume;
     }
 
     /**
@@ -150,7 +149,6 @@ class Volume extends \yii\db\ActiveRecord
         if($volume == NULL)
             $volume = 0;
 
-        $formatter = \Yii::$app->formatter;
-        return $formatter->asDecimal($volume,2);
+        return (int) $volume;
     }
 }

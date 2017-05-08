@@ -63,7 +63,11 @@ $this->params['breadcrumbs'][] = $this->title;
 						         	'text' => 'Volume (MT)'
 						      	]
 						   	],
-					      	'credits'=> false
+					      	'credits'=> false,
+					      	'lang' => [
+						        'thousandsSep' => ',',
+						        'decimalPoint' => '.'
+						    ]
 					   	]
 					]); ?>
 
@@ -82,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			    				<?php 
 			    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
 			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
-			    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
+			    					$surplus = (int)($supply - $utilization);
 			    				?>
 			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $supply ?></td>
