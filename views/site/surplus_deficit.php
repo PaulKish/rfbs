@@ -64,10 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
 						      	]
 						   	],
 					      	'credits'=> false,
-					      	'lang' => [
-						        'thousandsSep' => ',',
-						        'decimalPoint' => '.'
-						    ]
 					   	]
 					]); ?>
 
