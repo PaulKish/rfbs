@@ -6,12 +6,16 @@ use Yii;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
 use yii\web\Controller;
+use yii\base\Model;
+use app\models\Assignment;
 use app\models\Country;
 use app\models\Commodity;
+use app\models\Contributor;
 use app\models\FilterForm;
 use app\models\Volume;
 use app\models\Type;
 use app\models\Report;
+use app\models\GridForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
@@ -45,7 +49,7 @@ class SiteController extends Controller
                     ],
                     [
                         'allow' => false,
-                        'actions' => ['balance-sheet'],
+                        'actions' => ['balance-sheet','submission','submission-form'],
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return Yii::$app->user->identity->role != 'Contributor';
@@ -57,7 +61,7 @@ class SiteController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['balance-sheet'],
+                        'actions' => ['balance-sheet','submission','submission-form'],
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return Yii::$app->user->identity->role == 'Contributor';
@@ -235,4 +239,95 @@ class SiteController extends Controller
 
         return $this->render('resources',['dataProvider'=>$dataProvider]);
     }
+
+    /**
+     * Contributor submission
+     */
+    public function actionSubmission(){
+        $model = new GridForm;
+        $model->scenario = 'submission';
+        $commodities = ArrayHelper::map(Commodity::find()->all(),'id','commodity');
+
+        return $this->render('submission',[
+            'commodities' => $commodities,
+            'model'=> $model
+        ]);
+    }
+
+    /**
+     * Contributor submission form
+     */ 
+    public function actionSubmissionForm(){
+        $model = new GridForm;
+        $model->scenario = 'submission';
+
+        $user = Yii::$app->user->identity->username;
+        $contributor = Contributor::find()->where(['username'=>$user])->one();
+
+        // if no record exists prompt user with notice 
+        if($contributor == NULL){
+            Yii::$app->session->setFlash('error', 'Contributor account does not exist. Please contact EAGC');
+            return $this->redirect('/site/index');
+        }
+
+        if ($model->load(Yii::$app->request->get())){
+        
+            // get assignments for role
+            $assignments = Assignment::find()->where(['role_id'=>$contributor->role_id])->all();
+
+            // bad stuff
+            $count = Assignment::find()->where(['role_id'=>$contributor->role_id])->count();
+            for($i = 0; $i < $count; $i++){
+                $gridModel[$i] = new Volume();
+            }
+
+            // multiple madness
+            if (Model::loadMultiple($gridModel, Yii::$app->request->post()) && Model::validateMultiple($gridModel)) {
+                foreach ($gridModel as $grid) {
+                    $grid->date = $model->date;
+                    $grid->user_id = $contributor->id;
+                    $grid->product_id = $model->commodity;
+                    $grid->active = 1;
+                    $grid->save(false);
+                }
+
+                // flash message
+                Yii::$app->session->setFlash('success', 'Submission added');
+
+                return $this->redirect('submission');
+            }
+
+            return $this->render('submission_form',[
+                'contributor' => $contributor,
+                'assignments' => $assignments,
+                'model' => $model,
+                'gridModel' => $gridModel
+            ]);
+
+        } else {
+            return $this->redirect('submission');
+        }
+    } 
+
+    /**
+     *  Contributor sign up
+     *
+    public function actionContributorSignUp(){
+        $model = new Contributor();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Account created. Please follow the instructions on email');
+            return $this->redirect('site/index');
+        } else {
+            // fetch drop down data
+            $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+            $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
+
+            return $this->render('contributor_signup', [
+                'model' => $model,
+                'countries' => $countries,
+                'roles' => $roles
+            ]);
+        }
+    } */
 }

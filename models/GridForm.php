@@ -15,6 +15,7 @@ class GridForm extends Model
     {
         return [
             [['commodity', 'contributor', 'date'], 'required','on'=>'create'],
+            [['commodity', 'date'], 'required','on'=>'submission'],
             [['commodity', 'date'], 'required','on'=>'update'],
         ];
     }

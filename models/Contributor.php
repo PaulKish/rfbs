@@ -110,4 +110,31 @@ class Contributor extends \yii\db\ActiveRecord
 
         return (bool)$volume;
     }
+
+    /**
+     *  After Save
+     *  Create new account for each contributor
+     */ 
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        
+        // only run on insert, use yii command to create user
+        if($insert){
+            $oldApp = \Yii::$app;
+            new \yii\console\Application([
+                'id' => 'Command runner',
+                'basePath' => '@app',
+                'components' => [
+                    'db' => $oldApp->db,
+                ],
+                'modules' => [
+                    'user' => [
+                        'class' => 'dektrium\user\Module',
+                    ],
+                ],
+            ]);
+            \Yii::$app->runAction('user/create',[$this->email,$this->username,NULL,'Contributor']);
+            \Yii::$app = $oldApp;
+        }
+    }
 }
