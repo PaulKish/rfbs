@@ -8,12 +8,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\Volume;
 use yii\web\View;
+use yii\bootstrap\Carousel;
 
 $this->title = 'Regional Food Balance Sheet';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
+	<div class="jumbotron">
         <h1>Regional Food Balance Sheet</h1>
 
         <p class="lead"> by EAGC</p>
