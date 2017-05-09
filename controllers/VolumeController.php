@@ -171,15 +171,15 @@ class VolumeController extends Controller
     }
 
     /**
-     * Multiple delete
+     * Multiple publish
      */
     public function actionPublish($status)
     {
         $ids = Yii::$app->request->post('ids');
         foreach($ids as $id){
-            $volume = $this->findModel($id);
-            $volume->active = $status;
-            $volume->save();
+            $model = $this->findModel($id);
+            $model->active = $status;
+            $model->save();
         }
 
         $message = 'published';
@@ -187,7 +187,7 @@ class VolumeController extends Controller
             $message = 'unpublished';
         }
 
-        Yii::$app->getSession()->setFlash('success',"The selected rows have been $message successfully");
+        Yii::$app->getSession()->setFlash('success',"The selected row(s) have been $message successfully");
         return $this->redirect(['index']);
     }
 

@@ -74,7 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'form-control',
             ],
         ]) ?>
-
     </div>
     <div class="pull-right">
         <?= \nterms\pagesize\PageSize::widget([

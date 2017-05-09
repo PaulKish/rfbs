@@ -231,7 +231,7 @@ class SiteController extends Controller
      */ 
     public function actionResources(){
         $dataProvider = new ActiveDataProvider([
-            'query' => Report::find()->orderBy('id desc'),
+            'query' => Report::find()->where(['active'=>1])->orderBy('id desc'),
             'pagination' => [
                 'pageSize' => 20,
             ],
