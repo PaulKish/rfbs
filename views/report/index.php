@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Reports';
+$this->title = 'Resources';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="report-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr>
 
     <div class="pull-left">
-        <?= Html::a('Create Report', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Resource', ['create'], ['class' => 'btn btn-success']) ?>
     </div>
 
     <div class="pull-right">
@@ -43,7 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'title',
+            'category',
             'date:datetime',
+            'active:boolean',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

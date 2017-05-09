@@ -96,7 +96,7 @@ AppAsset::register($this);
 						        'options' => ['class' => 'nav-pills'],
 						        'items' => [
 						        	['label' => 'Volume', 'url' => ['/volume/index']],
-						        	['label' => 'Reports', 'url' => ['/report/index']],
+						        	['label' => 'Resources', 'url' => ['/report/index']],
 						            ['label' => 'Commodities', 'url' => ['/commodity/index']],
 						            ['label' => 'Contributors', 'url' => ['/contributor/index']],
 						            ['label' => 'Countries', 'url' => ['/country/index']],	  

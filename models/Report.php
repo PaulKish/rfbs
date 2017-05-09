@@ -27,8 +27,9 @@ class Report extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','upload'], 'required'],
+            [['title','category','content','active'], 'required'],
             [['title'], 'string', 'max' => 255],
+            [['category','content'],'string'],
             ['upload', 'file', 'extensions' => 'doc, docx, pdf, jpeg, jpg, png', 'on' => ['insert', 'update']],
         ];
     }
@@ -42,13 +43,16 @@ class Report extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'upload' => 'Upload',
+            'content' => 'Content',
+            'category' => 'Category',
+            'active'  => 'Active'
         ];
     }
 
     /**
      * @inheritdoc
      */
-    function behaviors()
+    public function behaviors()
     {
         return [
             [
