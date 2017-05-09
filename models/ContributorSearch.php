@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\contributor;
+use app\models\Contributor;
 
 /**
  * ContributorSearch represents the model behind the search form of `app\models\contributor`.
