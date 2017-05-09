@@ -16,6 +16,7 @@ use app\models\Volume;
 use app\models\Type;
 use app\models\Report;
 use app\models\GridForm;
+use app\models\ContactForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
@@ -83,7 +84,10 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+            ],
         ];
     }
 
@@ -126,7 +130,14 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        return $this->render('contact');
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+            return $this->refresh();
+        }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
     }
 
     /**

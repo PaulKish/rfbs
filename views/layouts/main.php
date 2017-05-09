@@ -69,7 +69,7 @@ MainAsset::register($this);
                     ],
                     ['label' => 'Balance Sheet', 'url' => ['/site/balance-sheet']],
                     ['label' => 'Resources', 'url' => ['/site/resources']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => 'Contact Us', 'url' => ['/site/contact']],
                     ['label' => 'Account', 
                         'items'=> [
                             [
