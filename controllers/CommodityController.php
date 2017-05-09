@@ -44,6 +44,20 @@ class CommodityController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'delete-multiple' => [
+                'class' => 'mickgeek\actionbar\DeleteMultipleAction',
+                'modelClass' => 'app\models\Commodity',
+                'afterDeleteCallback' => function ($action) {
+                    Yii::$app->getSession()->setFlash('success', 'The selected row(s) have been deleted successfully.');
+                },
+            ]
+        ];
+    }
+
+
     /**
      * Lists all commodity models.
      * @return mixed
@@ -122,6 +136,38 @@ class CommodityController extends Controller
     {
         $this->findModel($id)->delete();
 
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Multiple delete
+     */
+    public function actionDeleteMultiple()
+    {
+        $ids = Yii::$app->request->post('ids');
+        foreach($ids as $id){
+            $this->findModel($id)->delete();
+        }
+    }
+
+    /**
+     * Multiple publish
+     */
+    public function actionPublish($status)
+    {
+        $ids = Yii::$app->request->post('ids');
+        foreach($ids as $id){
+            $model = $this->findModel($id);
+            $model->active = $status;
+            $model->save();
+        }
+
+        $message = 'published';
+        if($status == 0){
+            $message = 'unpublished';
+        }
+
+        Yii::$app->getSession()->setFlash('success',"The selected row(s) have been $message successfully");
         return $this->redirect(['index']);
     }
 
