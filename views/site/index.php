@@ -38,7 +38,7 @@ $this->title = 'Regional Food Balance Sheet';
 	    <?php ActiveForm::end(); ?>
     </div>
     
-    <h2>Reports</h2>
+    <h2>Reports for <?= date('F Y',strtotime($model->date)) ?></h2>
 
     <hr>
 
@@ -65,7 +65,7 @@ $this->title = 'Regional Food Balance Sheet';
 								   'options' => [
 								   		'chart' => [
 									        'type' =>'pie',
-									       	'height' => 290,
+									       	'height' => 268,
 									       	'width' => 500 
 									    ],
 								      	'title' => false,
@@ -130,7 +130,7 @@ $this->title = 'Regional Food Balance Sheet';
 			    				<?php 
 			    					$supply = Volume::catVolume(2,$key,$model->date,$model->end_date,$model->country);
 			    					$utilization = Volume::catVolume(1,$key,$model->date,$model->end_date,$model->country);
-			    					$surplus = \Yii::$app->formatter->asDecimal($supply - $utilization,2);
+			    					$surplus = (int)($supply - $utilization);
 			    				?>
 			    				<th><?= $value ?></th>
 			    				<td class="text-right"><?= $supply ?></td>
@@ -171,7 +171,7 @@ $this->title = 'Regional Food Balance Sheet';
 		    					$commercial = Volume::typeVolume(2,$key,$model->date,$model->end_date,$model->country);
 		    					$processors = Volume::typeVolume(4,$key,$model->date,$model->end_date,$model->country);
 								$warehouses = Volume::typeVolume(5,$key,$model->date,$model->end_date,$model->country);
-								$total = \Yii::$app->formatter->asDecimal($commercial + $processors + $warehouses,2);
+								$total = (int)($commercial + $processors + $warehouses);
 		    				?>
 			    			<tr>
 			    				<th><?= $value ?></th>
@@ -245,18 +245,15 @@ $this->title = 'Regional Food Balance Sheet';
 			  	</div>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<h2>Contact</h2>
-			<hr>
 
-	        <address>
-				Mbaazi Avenue, Off Kingara Road <br>
-				P.O Box 218-00606 Nairobi, Kenya <br>
-				Tel: +254 20 3745840/ 37560636/7 <br>
-				Mobile: +254 710 607 313/ +254 733 444 035 <br>
-				Fax: +254 20 3745841, Secretariat <br>
-				Email: <?= Html::mailto('rfbs@eagc.org') ?> 
-	    	</address>
+		<div class="col-md-6">
+			<h2>Related Links</h2>
+			<hr>
+			<ul>
+				<li><?= Html::a('EAGC','http://eagc.org') ?></li>
+				<li><?= Html::a('RATIN','http://ratin.net') ?></li>
+				<li><?= Html::a('G-Soko','http://g-soko.com') ?></li>
+			</ul>
 		</div>
 	</div>
 

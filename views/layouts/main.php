@@ -127,7 +127,7 @@ MainAsset::register($this);
                 </p>
 
                 <p class="pull-right">
-                    <?= Html::a('EAGC','http://eagc.org') ?> | <?= Html::a('RATIN','http://ratin.net') ?>
+                    <?= Html::a('Terms and Conditions','#') ?> | <?= Html::a('Disclaimer and Privacy Policy','#') ?>
                 </p>
             </div>
         </footer>

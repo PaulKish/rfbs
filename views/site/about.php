@@ -6,8 +6,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
 	<div class="jumbotron">
         <h1>Regional Food Balance Sheet</h1>
-
-        <p class="lead"> by EAGC</p>
     </div>
 
     <hr>

@@ -18,7 +18,7 @@ class MainAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bootstrap.min.css',
+        'css/bootstrap-simplex.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.2.5/css/tableexport.min.css',
         'css/site.css',
     ];

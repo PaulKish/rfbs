@@ -121,3 +121,7 @@ a.desc:after {
 .panel h1{
     margin-top: 0px;
 }
+
+.breadcrumb {
+    background-color: #F5F5F5;
+}
