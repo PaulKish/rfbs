@@ -1,8 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use mickgeek\actionbar\Widget as ActionBar;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -19,7 +21,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr>
 
     <div class="pull-left">
-        <?= Html::a('Create Contributor', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= ActionBar::widget([
+            'grid' => 'contributor-grid',
+            'templates' => [
+                '{bulk-actions}' => ['class' => 'col-xs-6'],
+                '{create}' => ['class' => 'col-xs-6'],
+            ],
+            'bulkActionsItems' => [
+                'Publish' => 'Publish',
+                'Unpublish' => 'Unpublish',
+                'Delete' => 'Delete'
+            ],
+            'bulkActionsOptions' => [
+                'options' => [
+                    'Publish' => [
+                        'url' => Url::toRoute(['publish', 'status' => 1]),
+                    ],
+                    'Unpublish' => [
+                        'url' => Url::toRoute(['publish', 'status' => 0]),
+                    ],
+                    'Delete' => [
+                        'url' => Url::toRoute('delete-multiple'),
+                        'data-confirm' => 'Are you sure?'
+                    ],
+                ],
+                'class' => 'form-control',
+            ],
+        ]) ?>
     </div>
 
     <div class="pull-right">
@@ -37,12 +65,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'id' => 'contributor-grid',
         'filterModel' => $searchModel,
         'layout'=>"{items}\n <hr><div class='pull-left'>{pager}</div>
                     <div class='pull-right'>{summary}</div>",
         'filterSelector' => 'select[name="pagesize"]',
         'tableOptions' => ['id'=>'contributors','class'=>'table-export table table-bordered'],
         'columns' => [
+            ['class' => 'yii\grid\CheckboxColumn'],
             ['class' => 'yii\grid\SerialColumn'],
             'organization',
             'role.role',

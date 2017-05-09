@@ -86,7 +86,7 @@ class ContributorSearch extends contributor
             'role_id' => $this->role_id,
             'country_id' => $this->country_id,
             'date' => $this->date,
-            'active' => $this->active,
+            'contributor.active' => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])

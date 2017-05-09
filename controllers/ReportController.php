@@ -51,7 +51,7 @@ class ReportController extends Controller
                 'class' => 'mickgeek\actionbar\DeleteMultipleAction',
                 'modelClass' => 'app\models\Report',
                 'afterDeleteCallback' => function ($action) {
-                    Yii::$app->getSession()->setFlash('success', 'The selected rows have been deleted successfully.');
+                    Yii::$app->getSession()->setFlash('success', 'The selected row(s) have been deleted successfully.');
                 },
             ]
         ];
