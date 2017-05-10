@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -127,7 +128,7 @@ MainAsset::register($this);
                 </p>
 
                 <p class="pull-right">
-                    <?= Html::a('Terms and Conditions','#') ?> | <?= Html::a('Disclaimer and Privacy Policy','#') ?>
+                    <?= Html::a('Terms and Conditions',Url::to('@web/docs/terms.pdf'),['target'=>'_blank']) ?> | <?= Html::a('Privacy Policy',Url::to('@web/docs/privacy.pdf'),['target'=>'_blank']) ?> | <?= Html::a('Disclaimer',Url::to('@web/docs/disclaimer.pdf'),['target'=>'_blank']) ?>
                 </p>
             </div>
         </footer>
