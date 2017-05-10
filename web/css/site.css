@@ -3,6 +3,19 @@ body {
     height: 100%;
 }
 
+/*
+.navbar-brand {
+  height: 80px;
+}
+.nav >li >a {
+  padding-top: 50px;
+  padding-bottom: 35px;
+}
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}*/
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -11,7 +24,7 @@ body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 60px 15px 20px;
 }
 
 .footer {
