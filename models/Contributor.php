@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\Models\User;
+use dektrium\user\Finder;
 
 /**
  * This is the model class for table "contributor".
@@ -120,21 +122,24 @@ class Contributor extends \yii\db\ActiveRecord
         
         // only run on insert, use yii command to create user
         if($insert){
-            $oldApp = \Yii::$app;
-            new \yii\console\Application([
-                'id' => 'Command runner',
-                'basePath' => '@app',
-                'components' => [
-                    'db' => $oldApp->db,
-                ],
-                'modules' => [
-                    'user' => [
-                        'class' => 'dektrium\user\Module',
-                    ],
-                ],
+            $user = Yii::createObject([
+                'class'    => User::className(),
+                'scenario' => 'create',
+                'email'    => $this->email,
+                'username' => $this->username,
+                //'password' => $password,
+                'role'     => 'Contributor'
             ]);
-            \Yii::$app->runAction('user/create',[$this->email,$this->username,NULL,'Contributor']);
-            \Yii::$app = $oldApp;
+
+            if ($user->create()) {
+               Yii::$app->getSession()->setFlash('success',"User account created");
+            } else {
+                foreach ($user->errors as $errors) {
+                    foreach ($errors as $error) {
+                        Yii::$app->getSession()->setFlash('error',$error);
+                    }
+                }
+            }
         }
     }
 }
