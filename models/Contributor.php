@@ -42,7 +42,9 @@ class Contributor extends \yii\db\ActiveRecord
     {
         return [
             [['telephone'], 'integer'],
+            [['email'],'email'],
             [['username','password','email','organization','telephone','country_id','location_id'],'required'],
+            ['username', 'unique', 'targetAttribute' => ['username'], 'message' => 'Username must be unique.'],
             [['date'], 'safe'],
             [['username', 'password', 'email', 'organization'], 'string', 'max' => 50],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],

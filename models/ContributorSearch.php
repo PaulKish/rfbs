@@ -57,6 +57,9 @@ class ContributorSearch extends contributor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => isset($params['pagesize']) ? $params['pagesize']:50,
+            ],
         ]);
 
         $this->load($params);
