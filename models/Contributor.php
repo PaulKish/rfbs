@@ -47,9 +47,22 @@ class Contributor extends \yii\db\ActiveRecord
             ['username', 'unique', 'targetAttribute' => ['username'], 'message' => 'Username must be unique.'],
             [['date'], 'safe'],
             [['username', 'password', 'email', 'organization'], 'string', 'max' => 50],
+            [['password'],'string','min' => 4],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::className(), 'targetAttribute' => ['role_id' => 'id']],
+            ['username','validateUsername'],
         ];
+    }
+
+    public function validateUsername($attribute, $params)
+    {
+        if (preg_match('/\s+/', $this->$attribute)) {
+            $this->addError($attribute, 'Username should not contain whitespace');
+        }
+
+        if ( ! preg_match('/^.{4,8}$/', $this->$attribute) ) {
+            $this->addError($attribute, 'Username must be bwtween 4 to 8 characters.');
+        }
     }
 
     /**
