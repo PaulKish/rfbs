@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use dektrium\user\filters\AccessRule;
 use app\models\Country;
+use app\models\Location;
 use app\models\Role;
 use yii\helpers\ArrayHelper;
 
@@ -103,11 +104,13 @@ class ContributorController extends Controller
         } else {
             // fetch drop down data
             $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+            $locations = ArrayHelper::map(Location::find()->all(), 'id', 'location');
             $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
 
             return $this->render('create', [
                 'model' => $model,
                 'countries' => $countries,
+                'locations'=>$locations,
                 'roles' => $roles
             ]);
         }
@@ -129,11 +132,13 @@ class ContributorController extends Controller
         } else {
             // fetch drop down data
             $countries = ArrayHelper::map(Country::find()->all(), 'id', 'country');
+            $locations = ArrayHelper::map(Location::find()->all(), 'id', 'location');
             $roles = ArrayHelper::map(Role::find()->all(), 'id', 'role');
 
             return $this->render('update', [
                 'model' => $model,
                 'countries' => $countries,
+                'locations'=>$locations,
                 'roles' => $roles
             ]);
         }
@@ -183,6 +188,17 @@ class ContributorController extends Controller
         Yii::$app->getSession()->setFlash('success',"The selected row(s) have been $message successfully");
         return $this->redirect(['index']);
     }
+
+    /**
+     *  List of locations
+     */
+    public function actionLocations($id){
+        $locations = Location::find()->where(['country_id'=>$id])->all();
+        echo "<option value=''>--Please select--</option>";
+        foreach ($locations as $location) {
+            echo "<option value='{$location->id}'>{$location->location}</option>";
+        }
+    } 
 
     /**
      * Finds the contributor model based on its primary key value.

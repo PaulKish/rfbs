@@ -18,7 +18,7 @@ class ContributorSearch extends contributor
     public function attributes()
     {
         // add related fields to searchable attributes
-      return array_merge(parent::attributes(), ['role.role','country.country']);
+      return array_merge(parent::attributes(), ['role.role','country.country','location.location']);
 
     }
 
@@ -29,7 +29,7 @@ class ContributorSearch extends contributor
     {
         return [
             [['id', 'telephone', 'role_id', 'country_id', 'active'], 'integer'],
-            [['username', 'password', 'email', 'organization', 'date', 'role.role', 'country.country'], 'safe'],
+            [['username', 'password', 'email', 'organization', 'date', 'role.role', 'country.country','location.location'], 'safe'],
         ];
     }
 
@@ -77,7 +77,12 @@ class ContributorSearch extends contributor
             'desc' => ['country.country' => SORT_DESC],
         ];
 
-        $query->joinWith(['role','country']);
+        $dataProvider->sort->attributes['location.location'] = [
+            'asc' => ['location.location' => SORT_ASC],
+            'desc' => ['location.location' => SORT_DESC],
+        ];
+
+        $query->joinWith(['role','country','location']);
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -95,6 +100,7 @@ class ContributorSearch extends contributor
             ->andFilterWhere(['like', 'organization', $this->organization]);
 
         $query->andFilterWhere(['LIKE', 'country.country', $this->getAttribute('country.country')])
+            ->andFilterWhere(['LIKE', 'location.location', $this->getAttribute('location.location')])
             ->andFilterWhere(['LIKE', 'role.role', $this->getAttribute('role.role')]);
 
         return $dataProvider;

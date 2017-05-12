@@ -77,6 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'organization',
             'role.role',
             'country.country',
+            'location.location',
             'date',
             'active:boolean',
             ['class' => 'yii\grid\ActionColumn'],

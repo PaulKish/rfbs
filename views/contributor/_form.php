@@ -27,12 +27,23 @@ use dosamigos\datepicker\DatePicker;
         $roles,['prompt'=>'--Please select--']) ?>
 
     <?= $form->field($model, 'country_id')->dropDownList(
-        $countries,['prompt'=>'--Please select--']) ?>
+        $countries,[
+            'prompt'=>'--Please select--',
+            'onchange'=>'
+                $.post("/contributor/locations?id="+$(this).val(), 
+                    function(data) {
+                        $("#contributor-location_id").html(data);
+                });'
+        ]) ?>
+
+    <?= $form->field($model, 'location_id')->dropDownList(
+        $locations,['prompt'=>'--Please select--']) ?>
 
     <?= $form->field($model, 'date')->widget(DatePicker::classname(), [
         'clientOptions' => [
             'autoclose' => true,
-            'format' => 'yyyy-mm-dd'
+            'format' => 'yyyy-mm-dd',
+            'endDate' => '+0d'
         ]
     ]) ?>
 

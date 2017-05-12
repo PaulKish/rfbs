@@ -41,7 +41,8 @@ class Contributor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['telephone', 'role_id', 'country_id', 'active'], 'integer'],
+            [['telephone'], 'integer'],
+            [['username','password','email','organization','telephone','country_id','location_id'],'required'],
             [['date'], 'safe'],
             [['username', 'password', 'email', 'organization'], 'string', 'max' => 50],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
@@ -63,6 +64,7 @@ class Contributor extends \yii\db\ActiveRecord
             'organization' => 'Organization',
             'role_id' => 'Role',
             'country_id' => 'Country',
+            'location_id' => 'Location',
             'date' => 'Date',
             'active' => 'Active',
             'volume' => 'Volumes Submitted'
@@ -75,6 +77,14 @@ class Contributor extends \yii\db\ActiveRecord
     public function getCountry()
     {
         return $this->hasOne(Country::className(), ['id' => 'country_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocation()
+    {
+        return $this->hasOne(Location::className(), ['id' => 'location_id']);
     }
 
     /**
