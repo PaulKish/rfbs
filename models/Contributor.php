@@ -60,7 +60,7 @@ class Contributor extends \yii\db\ActiveRecord
             $this->addError($attribute, 'Username should not contain whitespace');
         }
 
-        if ( ! preg_match('/^.{4,8}$/', $this->$attribute) ) {
+        if ( ! preg_match('/^.{4,12}$/', $this->$attribute) ) {
             $this->addError($attribute, 'Username must be bwtween 4 to 8 characters.');
         }
     }
