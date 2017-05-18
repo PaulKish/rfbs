@@ -52,7 +52,7 @@ class VolumeSearch extends volume
      */
     public function search($params)
     {
-        $query = volume::find();
+        $query = Volume::find()->orderBy('date desc');
 
         // add conditions that should always apply here
 
