@@ -41,8 +41,7 @@ class Contributor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['telephone','telephone_2'], 'integer','min'=>10],
-            [['latitude','longitude'],'number'],
+            [['telephone','telephone_2','latitude','longitude'],'number'],
             [['email'],'email'],
             [['username','password','email','organization','telephone','country_id','location_id'],'required'],
             ['username', 'unique', 'targetAttribute' => ['username'], 'message' => 'Username must be unique.'],

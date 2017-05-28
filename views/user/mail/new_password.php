@@ -24,10 +24,11 @@ use yii\helpers\Url;
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= Yii::t('user', 'Your account on {0} has a new password', Yii::$app->name) ?>.
-    <p>Website Link: <?= Html::a(Url::home(true),Url::home(true)); ?></a></p>
-    <p>Your username: <strong><?= $user->username ?></strong></p>
-    <?= Yii::t('user', 'We have generated a password for you') ?>: <strong><?= $user->password ?></strong>
+    <?= Yii::t('user', 'Your account on {0} has a new password', Yii::$app->name) ?>.<br>
+    Website Link: <?= Html::a(Url::home(true),Url::home(true)); ?><br>
+    Your username: <strong><?= $user->username ?></strong><br>
+    <?= Yii::t('user', 'We have generated a password for you') ?>: <strong><?= $user->password ?></strong><br>
+    To login please go to <?= Html::a(Url::home(true),Url::home(true)); ?> then click on Account then select login.<br>
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
