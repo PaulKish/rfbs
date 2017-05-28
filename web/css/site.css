@@ -25,6 +25,9 @@ body {
 
 .wrap > .container {
     padding: 60px 15px 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    background-color: #fcfcfc;
 }
 
 .footer {
@@ -138,3 +141,22 @@ a.desc:after {
 .breadcrumb {
     background-color: #F5F5F5;
 }
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  max-height: 400px;    /* Set slide height here */
+}
+
+.carousel-caption {
+    padding-bottom: 50px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.carousel-caption p{
+    font-size: 20px;
+} 
+
+.carousel-caption h1{
+    font-size: 40px;
+} 

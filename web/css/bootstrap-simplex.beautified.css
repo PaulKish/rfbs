@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 /*!
  * bootswatch v3.3.7
@@ -1402,8 +1402,8 @@ html {
 }
 
 body {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
     line-height: 1.42857143;
     color: #777777;
     background-color: #fcfcfc

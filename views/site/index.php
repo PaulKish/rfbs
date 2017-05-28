@@ -14,18 +14,51 @@ $this->title = 'Regional Food Balance Sheet';
 ?>
 <div class="site-index">
 
-	<div class="jumbotron">
-        <h1>Regional Food Balance Sheet</h1>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#myCarousel" data-slide-to="1"></li>
+		</ol>
 
-        <p class="lead"> by EAGC</p>
+	  	<!-- Wrapper for slides -->
+	  	<div class="carousel-inner">
+		    <div class="item active">
+		      	<?= Html::img('@web/img/slide1.jpg'); ?>
+		      	<div class="carousel-caption">
+		      		<h1>Regional Food Balance Sheet</h1>
 
-        <p>This Website allows grain stakeholders to access information on staple foods supply and utilization in the region for policy advisory, trade linkage information based on food supply and food security</p>
+			        <p class="lead"> by EAGC</p>
 
-        <p><a class="btn btn-lg btn-success" href="#">Get started</a></p>
-    </div>
+			        <p>This Website allows grain stakeholders to access information on staple foods supply and utilization in the region for policy advisory, trade linkage information based on food supply and food security</p>
+
+		      	</div>
+		    </div>
+
+		    <div class="item">
+		      	<?= Html::img('@web/img/slide3.jpg'); ?>
+		      	<div class="carousel-caption">
+		      		<h1>Regional Food Balance Sheet</h1>
+
+			        <p class="lead"> by EAGC</p>
+
+			        <p>This Website indicates the available food stocks for a particular specific region and time determined by a derived scientific formula to situate available food.</p>
+		      	</div>
+		    </div>
+	  	</div>
+
+		<!-- Left and right controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left"></span>
+		    <span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right"></span>
+		    <span class="sr-only">Next</span>
+		</a>
+	</div>
 
     <hr>
-
 
     <div class="pull-right">
 	    <?php $form = ActiveForm::begin([
@@ -65,9 +98,7 @@ $this->title = 'Regional Food Balance Sheet';
 					    		<?= Highcharts::widget([
 								   'options' => [
 								   		'chart' => [
-									        'type' =>'pie',
-									       	'height' => 268,
-									       	'width' => 500 
+									        'type' =>'pie'
 									    ],
 								      	'title' => false,
 								      	'plotOptions' => [
