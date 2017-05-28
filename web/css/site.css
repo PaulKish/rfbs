@@ -27,6 +27,8 @@ body {
     padding: 60px 15px 20px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
     background-color: #fcfcfc;
 }
 
