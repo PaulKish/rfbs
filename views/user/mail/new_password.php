@@ -10,6 +10,7 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * @var dektrium\user\Module          $module
@@ -24,7 +25,7 @@ use yii\helpers\Html;
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
     <?= Yii::t('user', 'Your account on {0} has a new password', Yii::$app->name) ?>.
-    <p>Website Link: <a href="http://rfbs.ratin.net">http://rfbs.ratin.net</a></p>
+    <p>Website Link: <?= Html::a(Url::home(true),Url::home(true)); ?></a></p>
     <p>Your username: <strong><?= $user->username ?></strong></p>
     <?= Yii::t('user', 'We have generated a password for you') ?>: <strong><?= $user->password ?></strong>
 </p>
