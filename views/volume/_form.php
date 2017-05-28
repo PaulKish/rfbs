@@ -27,7 +27,9 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'date')->widget(DatePicker::classname(), [
         'clientOptions' => [
             'autoclose' => true,
-            'format' => 'yyyy-mm-dd'
+            'format' => 'yyyy-mm-dd',
+            'endDate' => '+0d',
+            'todayHighlight'=>true
         ]
     ]) ?>
 
