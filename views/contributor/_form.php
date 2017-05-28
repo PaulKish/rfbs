@@ -21,6 +21,8 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'telephone')->textInput() ?>
 
+    <?= $form->field($model, 'telephone_2')->textInput() ?>
+
     <?= $form->field($model, 'organization')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'role_id')->dropDownList(
@@ -39,11 +41,16 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'location_id')->dropDownList(
         $locations,['prompt'=>'--Please select--']) ?>
 
+    <?= $form->field($model, 'latitude')->textInput() ?>
+
+    <?= $form->field($model, 'longitude')->textInput() ?>
+
     <?= $form->field($model, 'date')->widget(DatePicker::classname(), [
         'clientOptions' => [
             'autoclose' => true,
             'format' => 'yyyy-mm-dd',
-            'endDate' => '+0d'
+            'endDate' => '+0d',
+            'todayHighlight'=>true
         ]
     ]) ?>
 

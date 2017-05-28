@@ -41,11 +41,12 @@ class Contributor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['telephone'], 'integer'],
+            [['telephone','telephone_2'], 'integer','min'=>10],
+            [['latitude','longitude'],'number'],
             [['email'],'email'],
             [['username','password','email','organization','telephone','country_id','location_id'],'required'],
             ['username', 'unique', 'targetAttribute' => ['username'], 'message' => 'Username must be unique.'],
-            [['date','active'], 'safe'],
+            [['telephone_2','latitude','longitude','date','active'], 'safe'],
             [['username', 'password', 'email', 'organization'], 'string', 'max' => 50],
             [['password'],'string','min' => 4],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
@@ -61,7 +62,7 @@ class Contributor extends \yii\db\ActiveRecord
         }
 
         if ( ! preg_match('/^.{4,20}$/', $this->$attribute) ) {
-            $this->addError($attribute, 'Username must be bwtween 4 to 20 characters.');
+            $this->addError($attribute, 'Username must be between 4 to 20 characters.');
         }
     }
 
@@ -76,6 +77,7 @@ class Contributor extends \yii\db\ActiveRecord
             'password' => 'Password',
             'email' => 'Email',
             'telephone' => 'Telephone',
+            'telephone_2' => 'Telephone 2',
             'organization' => 'Organization',
             'role_id' => 'Role',
             'country_id' => 'Country',
