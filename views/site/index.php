@@ -98,7 +98,9 @@ $this->title = 'Regional Food Balance Sheet';
 					    		<?= Highcharts::widget([
 								   'options' => [
 								   		'chart' => [
-									        'type' =>'pie'
+									        'type' =>'pie',
+									        'width'=>'500',
+									        'height'=>'276'
 									    ],
 								      	'title' => false,
 								      	'plotOptions' => [

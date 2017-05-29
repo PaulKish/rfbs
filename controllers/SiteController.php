@@ -98,7 +98,7 @@ class SiteController extends Controller
     {
         $model = new FilterForm;
 
-        $date = date('Y-m',strtotime("-1 month"));
+        $date = date('Y-m');
         $model->date = $date;
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
@@ -153,8 +153,8 @@ class SiteController extends Controller
         $countries = [ 0 => 'Regional'] + $countries;
 
         if (!$model->load(Yii::$app->request->post())){
-            $model->date = date('Y-m-01',strtotime("-1 month"));
-            $model->end_date = date('Y-m-t',strtotime("-1 month"));
+            $model->date = date('Y-m-01');
+            $model->end_date = date('Y-m-t');
             $model->commodity = 1;
         }
 
@@ -171,8 +171,8 @@ class SiteController extends Controller
     public function actionSurplusDeficitReport(){
         $model = new FilterForm;
 
-        $model->date = date('Y-m-01',strtotime("-1 month"));
-        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+        $model->date = date('Y-m-01');
+        $model->end_date = date('Y-m-t');
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
@@ -195,8 +195,8 @@ class SiteController extends Controller
     public function actionTradeableStockReport(){
         $model = new FilterForm;
 
-        $model->date = date('Y-m-01',strtotime("-1 month"));
-        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+        $model->date = date('Y-m-01');
+        $model->end_date = date('Y-m-t');
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
@@ -219,8 +219,8 @@ class SiteController extends Controller
     public function actionProductionEstimateReport(){
         $model = new FilterForm;
 
-        $model->date = date('Y-m-01',strtotime("-1 month"));
-        $model->end_date = date('Y-m-t',strtotime("-1 month"));
+        $model->date = date('Y-m-01');
+        $model->end_date = date('Y-m-t');
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
