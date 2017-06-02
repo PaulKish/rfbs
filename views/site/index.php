@@ -36,7 +36,7 @@ $this->title = 'Regional Food Balance Sheet';
 		    </div>
 
 		    <div class="item">
-		      	<?= Html::img('@web/img/slide3.jpg'); ?>
+		      	<?= Html::img('@web/img/slide2.jpg'); ?>
 		      	<div class="carousel-caption">
 		      		<h1>Regional Food Balance Sheet</h1>
 
@@ -44,6 +44,10 @@ $this->title = 'Regional Food Balance Sheet';
 
 			        <p>This Website indicates the available food stocks for a particular specific region and time determined by a derived scientific formula to situate available food.</p>
 		      	</div>
+		    </div>
+
+		    <div class="item">
+		      	<?= Html::img('@web/img/slide3.jpg'); ?>
 		    </div>
 	  	</div>
 
