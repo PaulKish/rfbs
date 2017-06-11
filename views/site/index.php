@@ -103,19 +103,19 @@ $this->title = 'Regional Food Balance Sheet';
 					    		<?= Highcharts::widget([
 								   'options' => [
 								   		'chart' => [
-									        'type' =>'pie',
+									        'type' =>'column',
 									        'width'=>'500',
 									        'height'=>'276'
 									    ],
 								      	'title' => false,
-								      	'plotOptions' => [
-									        'pie' => [
-									            'allowPointSelect' => true,
-									            'cursor' => 'pointer',
-									            'dataLabels' => [
-								                    'enabled' => false
-								                ],
-								                'showInLegend'=>true
+								      	'xAxis' => [
+								      		'categories' => [
+								      			$value
+								      		]
+								      	],
+								      	'yAxis' => [
+									        'title' => [
+									            'text' => 'Volume (MT)'
 									        ]
 									    ],
 									    'tooltip' => [
@@ -123,18 +123,13 @@ $this->title = 'Regional Food Balance Sheet';
 								        ],
 								      	'series' => [
 									        [
-								                'name' => 'Volume',
-								                'data' => [
-								                	[
-											            'name' => 'Supply',
-											            'y' => (float) Volume::catVolume(2,$key,$model->date,$model->country) // 2 is supply
-											        ],
-											        [
-											            'name' => 'Utilization',
-											            'y' => (float) Volume::catVolume(1,$key,$model->date,$model->country) // 1 is utilization
-											        ]
-											    ]
+								                'name' => 'Supply',
+								                'data' => [(float) Volume::catVolume(1,$key,$model->date,$model->country)]
 								            ],
+								            [
+								            	'name' => 'Demand',
+								                'data' => [(float) Volume::catVolume(2,$key,$model->date,$model->country)]
+								            ]
 								      	],
 								      	'credits'=> false
 								   	]
