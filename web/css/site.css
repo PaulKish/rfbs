@@ -24,7 +24,7 @@ body {
 }
 
 .wrap > .container {
-    padding: 60px 15px 20px;
+    padding: 80px 15px 20px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -163,4 +163,13 @@ a.desc:after {
 .carousel-caption h1{
     font-size: 40px;
 } 
+}
+
+.navbar-brand{
+    padding: 0px;
+    height: 70px;
+}
+
+.navbar-nav{
+    margin-top:10px;
 }

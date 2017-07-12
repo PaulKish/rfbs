@@ -41,7 +41,7 @@ MainAsset::register($this);
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => Yii::$app->name,
+                'brandLabel' => Html::img('@web/img/logo_rfbs.jpg',['alt'=>Yii::$app->name,'height'=>'70px','caption'=>Yii::$app->name]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top',
