@@ -168,6 +168,9 @@ a.desc:after {
 .navbar-brand{
     padding: 0px;
     height: 70px;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 1px 0 1px;
 }
 
 .navbar-nav{
