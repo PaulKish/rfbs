@@ -48,7 +48,7 @@ $this->title = 'Regional Food Balance Sheet';
 		    </div>
 
 		    <div class="item">
-		      	<?= Html::img('@web/img/slide4.jpg'); ?>
+		      	<center><?= Html::img('@web/img/slide4.jpg'); ?></center>
 		    </div>
 	  	</div>
 
