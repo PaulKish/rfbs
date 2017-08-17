@@ -103,6 +103,8 @@ class SiteController extends Controller
 
         $countries = ArrayHelper::map(Country::find()->where(['active'=>1])->all(),'id','country');
         $commodities = ArrayHelper::map(Commodity::find()->where(['active'=>1])->all(),'id','commodity');
+
+        Yii::$app->session->setFlash('info', 'The data on this portal is incomplete and currently being populated, please check later');
     
         if (!$model->load(Yii::$app->request->get())){
             $model->commodity = 1;
